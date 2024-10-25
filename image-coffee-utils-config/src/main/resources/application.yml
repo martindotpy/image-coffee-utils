@@ -1,0 +1,9 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: msvc-config
+
+  profiles:
+    active: native, dev

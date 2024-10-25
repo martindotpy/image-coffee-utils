@@ -1,0 +1,65 @@
+services:
+    image-coffee-utils-config:
+        image: "image-coffee-utils-config:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-config
+        networks:
+            - image-coffee-utils-network
+
+    image-coffee-utils-eureka:
+        image: "image-coffee-utils-eureka:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-eureka
+        ports:
+            - "8761:8761"
+        networks:
+            - image-coffee-utils-network
+        depends_on:
+            - image-coffee-utils-config
+        environment:
+            - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
+            - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
+        entrypoint: ["sh", "-c", "sleep 4 && /cnb/process/web"]
+
+    image-coffee-utils-gateway:
+        image: "image-coffee-utils-gateway:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-gateway
+        ports:
+            - "8080:8080"
+        networks:
+            - image-coffee-utils-network
+        depends_on:
+            - image-coffee-utils-eureka
+        environment:
+            - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
+            - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
+        entrypoint: ["sh", "-c", "sleep 8 && /cnb/process/web"]
+
+    image-coffee-utils-ui:
+        image: "image-coffee-utils-ui:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-ui
+        networks:
+            - image-coffee-utils-network
+        depends_on:
+            - image-coffee-utils-gateway
+        environment:
+            - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
+            - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
+        entrypoint: ["sh", "-c", "sleep 12 && /cnb/process/web"]
+
+    image-coffee-utils-colors:
+        image: "image-coffee-utils-colors:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-colors
+        build:
+            context: ./image-coffee-utils-colors
+            dockerfile: Dockerfile
+        networks:
+            - image-coffee-utils-network
+        depends_on:
+            - image-coffee-utils-gateway
+        environment:
+            - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
+            - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
+        entrypoint: ["sh", "-c", "sleep 12 && python app.py"]
+
+networks:
+    image-coffee-utils-network:
+        driver: bridge

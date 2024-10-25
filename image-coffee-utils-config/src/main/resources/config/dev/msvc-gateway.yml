@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: colors
+          uri: lb://msvc-colors
+          predicates:
+            - Path=/api/v0/colors/**
+          filters:
+            - LoggingFilter
+            - StripPrefix=0
+
+        - id: ui
+          uri: lb://msvc-ui
+          predicates:
+            - Path=/**
+          filters:
+            - LoggingFilter
+            - StripPrefix=0
+
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins:
+              - "https://image-coffee-utils.cupscoffee.xyz"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+eureka:
+  client:
+    register-with-eureka: false
+
+logging:
+  pattern:
+    dateformat: HH:mm:ss
+    level: "%highlight(%-5level)"
+    console: "%clr(%d{HH:mm:ss}){faint} %highlight(%-5level) ---
+      [%clr(${spring.application.name:-}){yellow}] %clr(%-45.45logger{45}){cyan}
+      %clr(:){faint} %m%n"

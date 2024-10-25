@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Define the java microservices
+elements=("image-coffee-utils-config" "image-coffee-utils-eureka" "image-coffee-utils-gateway" "image-coffee-utils-ui")
+
+for e in "${elements[@]}"; do
+    mvn -f "$e" clean install spring-boot:build-image -DskipTests &
+done
+
+wait

@@ -1,0 +1,65 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: colors
+          uri: lb://msvc-colors
+          predicates:
+            - Path=/api/v0/colors/**
+          filters:
+            - LoggingFilter
+
+        - id: ui
+          uri: lb://msvc-ui
+          predicates:
+            - Path=/**
+
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins:
+              - "https://image-coffee-utils.cupscoffee.xyz"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+eureka:
+  instance:
+    hostname: ${SPRING_CLOUD_EUREKA_HOSTNAME:localhost}
+
+  client:
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka
+
+logging:
+  pattern:
+    level: "%highlight(%-5level)"
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %highlight(%-5level)
+      %clr(${PID:- }){magenta} %clr(---){faint}
+      [%clr(${spring.application.name:-}){yellow}] %clr(%-45.45logger{45}){cyan}
+      %clr(:){faint} %m%n"
+
+  file:
+    path: logs
+    name: logs/msvc-gateway.log
+
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

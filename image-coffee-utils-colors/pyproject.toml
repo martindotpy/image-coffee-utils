@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "image-coffee-utils-colors"
+version = "0.0.1-SNAPSHOT"
+description = "Colors utilities for Image Coffee Utils."
+authors = ["Martin Alexander Ramos Yampufé <alexanderamsyam@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+fastapi = "^0.115.2"
+python-dotenv = "^1.0.1"
+py-eureka-client = "^0.11.10"
+config-client = "^1.4.0"
+uvicorn = "^0.32.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

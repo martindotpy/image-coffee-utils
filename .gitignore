@@ -1,0 +1,52 @@
+# Env
+.env
+
+# Java
+target
+*.jar
+*.war
+
+# Python
+.venv
+__pycache__
+*.pyc
+poetry.lock
+
+# Build
+build/
+dist/
+
+# VS Code
+.vscode
+
+### IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Logs
+logs
+*.log
+
+# Saved images by the server
+img
+
+### STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache

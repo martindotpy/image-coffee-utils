@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: msvc-gateway
+
+  config:
+    import: configserver:${SPRING_CLOUD_CONFIG_URI:http://localhost:8888}
+
+  output:
+    ansi:
+      enabled: always

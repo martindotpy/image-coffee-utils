@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: msvc-config
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/prod
+
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  pattern:
+    level: "%highlight(%-5level)"
+    console:
+      "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %highlight(%-5level)
+      %clr(${PID:- }){magenta} %clr(---){faint}
+      [%clr(${spring.application.name:-}){yellow}] %clr(%-45.45logger{45}){cyan}
+      %clr(:){faint} %m%n"
