@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "image-coffee-utils-colors"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 description = "Colors utilities for Image Coffee Utils."
 authors = ["Martin Alexander Ramos Yampufé <alexanderamsyam@gmail.com>"]
 package-mode = false
