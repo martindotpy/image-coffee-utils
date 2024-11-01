@@ -11,6 +11,7 @@ fastapi = "^0.115.2"
 py-eureka-client = "^0.11.10"
 config-client = "^1.4.0"
 uvicorn = "^0.32.0"
+scikit-learn = "^1.5.2"
 
 [build-system]
 requires = ["poetry-core"]
