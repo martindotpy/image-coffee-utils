@@ -67,7 +67,8 @@ Python using FastAPI and Scikit-learn.
 
 The entry point is `/api/<api-version>/colors`.
 
-- `GET /<image_base64>`: Extracts the main colors from the image.
+- `POST /n=<colors-to-extract-from-the-image>`: Extracts the main colors from
+  the image. In the request body, you should send the image as a form-data file.
 
 ### Crop
 
