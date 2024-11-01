@@ -2,16 +2,18 @@ import os
 from multiprocessing import freeze_support
 
 import uvicorn
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from routes import routes
 from spring_cloud import IP, PORT, PROFILES, init_spring_config
 
-load_dotenv()
-
-
 app: FastAPI = FastAPI(
+    title="Image Coffee Utils Colors",
+    description="API to extract the most common colors from an image.",
     docs_url="/api/v0/colors/docs",
+    version="0.0.1",
+    openapi_tags=[
+        {"name": "colors", "description": "Operations related to colors"}
+    ],
     openapi_url="/api/v0/colors/openapi.json",
     redoc_url="/api/v0/colors/redoc",
 )
