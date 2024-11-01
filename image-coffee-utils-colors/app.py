@@ -3,7 +3,7 @@ from multiprocessing import freeze_support
 
 import uvicorn
 from fastapi import FastAPI
-from routes import routes
+from routes import dependencies, routes
 from spring_cloud import IP, PORT, PROFILES, init_spring_config
 
 app: FastAPI = FastAPI(
@@ -16,6 +16,7 @@ app: FastAPI = FastAPI(
     ],
     openapi_url="/api/v0/colors/openapi.json",
     redoc_url="/api/v0/colors/redoc",
+    dependencies=dependencies,
 )
 
 for router in routes:
