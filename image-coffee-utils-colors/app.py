@@ -17,7 +17,7 @@ app: FastAPI = FastAPI(
 )
 
 for router in routes:
-    app.include_router(router, prefix="/api/v0,/colors")
+    app.include_router(router, prefix="/api/v0/colors")
 
 
 if __name__ == "__main__":
