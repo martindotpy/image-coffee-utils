@@ -1,9 +1,7 @@
 # Image Coffee Utils
 
 <div align="center">
-
-<img src="image-coffee-utils-ui\src\main\webapp\assets\svg\header-logotype.svg" height="200" alt="Banner">
-
+  <img src="image-coffee-utils-ui\src\main\webapp\assets\svg\header-logotype.svg" height="200" alt="Banner">
 </div>
 
 This web application helps you work with images by allowing you to extract main
@@ -69,7 +67,7 @@ Python using FastAPI and Scikit-learn.
 
 The entry point is `/api/<api-version>/colors`.
 
-- `GET /<image-base64>`: Extracts the main colors from the image.
+- `GET /<image_base64>`: Extracts the main colors from the image.
 
 ### Crop
 
@@ -79,7 +77,7 @@ This microservice crops an image. It is built with Java using Spring Boot.
 
 The entry point is `/api/<api-version>/crop`.
 
-- `GET /<image-base64>?x=<x>&y=<y>&width=<width>&height=<height>`: Crops the
+- `GET /<image_base64>?x=<x>&y=<y>&width=<width>&height=<height>`: Crops the
   image.
 
 ### Resize
@@ -90,7 +88,7 @@ This microservice resizes an image. It is built with Java using Spring Boot.
 
 The entry point is `/api/<api-version>/resize`.
 
-- `GET /<image-base64>?width=<width>&height=<height>`: Resizes the image.
+- `GET /<image_base64>?width=<width>&height=<height>`: Resizes the image.
 
 ### Adjust Dimensions
 
@@ -101,7 +99,7 @@ using Spring Boot.
 
 The entry point is `/api/<api-version>/adjust-dimensions`.
 
-- `GET /<image-base64>?width=<width>&height=<height>`: Adjusts the dimensions of
+- `GET /<image_base64>?width=<width>&height=<height>`: Adjusts the dimensions of
   the image.
 
 ### Invert Colors
@@ -113,4 +111,4 @@ Spring Boot.
 
 The entry point is `/api/<api-version>/invert-colors`.
 
-- `GET /<image-base64>`: Inverts the colors of the image.
+- `GET /<image_base64>`: Inverts the colors of the image.
