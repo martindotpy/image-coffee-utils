@@ -12,6 +12,8 @@ py-eureka-client = "^0.11.10"
 config-client = "^1.4.0"
 uvicorn = "^0.32.0"
 scikit-learn = "^1.5.2"
+pillow = "^11.0.0"
+python-multipart = "^0.0.17"
 
 [build-system]
 requires = ["poetry-core"]
