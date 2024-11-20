@@ -1,10 +1,11 @@
 #!/bin/bash
+PREFIX="image-coffee-utils-"
 
 # Define the java microservices
-elements=("image-coffee-utils-config" "image-coffee-utils-eureka" "image-coffee-utils-gateway" "image-coffee-utils-ui")
+elements=("config" "eureka" "gateway" "ui")
 
 for e in "${elements[@]}"; do
-    mvn -f "$e" clean install spring-boot:build-image -DskipTests &
+    ./mvnw -f "$PREFIX$e" clean install spring-boot:build-image -DskipTests &
 done
 
 wait
