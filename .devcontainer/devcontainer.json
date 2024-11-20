@@ -1,0 +1,81 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+    "name": "Image Coffee Utils",
+
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+    "features": {
+        "ghcr.io/devcontainers/features/dotnet:2": {
+            "version": "8.0"
+        },
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "21",
+            "jdkDistro": "amzn"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "installTools": false
+        }
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Docker
+                "ms-azuretools.vscode-docker",
+                // Python
+                "-ms-python.autopep8",
+                "charliermarsh.ruff",
+                "KevinRose.vsc-python-indent",
+                "njpwerner.autodocstring",
+                // Java
+                "-vscjava.vscode-java-pack",
+                "redhat.java",
+                "vscjava.vscode-java-debug",
+                "vscjava.vscode-java-test",
+                "vscjava.vscode-maven",
+                "vscjava.vscode-java-dependency",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "vmware.vscode-boot-dev-pack",
+                // C#
+                // Markdown
+                "yzhang.markdown-all-in-one",
+                "DavidAnson.vscode-markdownlint",
+                // XML
+                "redhat.vscode-xml",
+                // TOML
+                "tamasfe.even-better-toml",
+                // YAML
+                "redhat.vscode-yaml",
+                // Dev
+                "naumovs.color-highlight",
+                "shardulm94.trailing-spaces",
+                "formulahendry.auto-close-tag",
+                "formulahendry.auto-rename-tag",
+                "usernamehw.errorlens",
+                "Zignd.html-css-class-completion",
+                "ritwickdey.LiveServer",
+                "Cardinal90.multi-cursor-case-preserve",
+                "christian-kohler.path-intellisense",
+                "foxundermoon.shell-format",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+
+    "postCreateCommand": "./.devcontainer/post-create.sh"
+
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {},
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+
+    // Configure tool-specific properties.
+    // "customizations": {},
+
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+}

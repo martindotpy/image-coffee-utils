@@ -1,0 +1,15 @@
+services:
+    devcontainer:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ../..:/workspaces:cached
+        container_name: devcontainer
+        networks:
+            - image-coffee-utils-network
+        command: sleep infinity
+
+networks:
+    image-coffee-utils-network:
+        driver: bridge

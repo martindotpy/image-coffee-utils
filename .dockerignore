@@ -1,0 +1,11 @@
+# Java
+target
+*.class
+
+# Python
+__pycache__
+*.pyc
+
+# C#
+bin
+obj

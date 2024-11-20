@@ -3,6 +3,8 @@
 
 # Java
 target
+target_test-classes
+*.class
 *.jar
 *.war
 
@@ -11,6 +13,10 @@ target
 __pycache__
 *.pyc
 poetry.lock
+
+# C#
+bin/
+obj/
 
 # Build
 build/
