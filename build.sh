@@ -5,7 +5,7 @@ PREFIX="image-coffee-utils-"
 elements=("config" "eureka" "gateway" "ui")
 
 for e in "${elements[@]}"; do
-    ./mvnw -f "$PREFIX$e" clean install spring-boot:build-image -DskipTests &
+    ./mvnw.sh -f "$PREFIX$e" clean install spring-boot:build-image -DskipTests &
 done
 
 wait
