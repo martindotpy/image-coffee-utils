@@ -1,1 +1,1 @@
-*.sh text eof=lf
+*.sh text eol=lf
