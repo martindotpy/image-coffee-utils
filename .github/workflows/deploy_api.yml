@@ -1,0 +1,56 @@
+name: Deploy API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Kill the previous api process
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            sudo fuser -k 8081/tcp || echo "No process running on port 8081"
+            cd /home/${{ secrets.USER }}/image-coffee-utils
+            docker compose down
+            sleep 10
+            chmod -R 755 ./remove-images-containeres.sh
+            ./remove-images-containeres.sh
+            rm -rf /home/${{ secrets.USER }}/image-coffee-utils
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy the code to the server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: .
+          target: /home/${{ secrets.USER }}/image-coffee-utils
+
+      - name: Run the api
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /home/${{ secrets.USER }}/image-coffee-utils
+            nohup bash -c 'docker build -t image-coffee-utils:0.0.1-SNAPSHOT . && \
+                docker run --privileged \
+                -v "/var/run/docker.sock":"/var/run/docker.sock" --rm \
+                --name image-coffee-utils \
+                -t image-coffee-utils:0.0.1-SNAPSHOT'
+                > output.log 2>&1 &

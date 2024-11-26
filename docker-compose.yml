@@ -23,7 +23,7 @@ services:
         image: "image-coffee-utils-gateway:0.0.1-SNAPSHOT"
         container_name: image-coffee-utils-gateway
         ports:
-            - "8080:8080"
+            - "8081:8080"
         networks:
             - image-coffee-utils-network
         depends_on:
