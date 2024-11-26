@@ -14,7 +14,7 @@
 	<artifactId>image-coffee-utils-ui</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>image-coffee-utils-ui</name>
-	<description>This is the frontend for Image Coffe Utils.</description>
+	<description>This is the frontend for Image Coffee Utils.</description>
 	<packaging>war</packaging>
 
 	<properties>
@@ -22,7 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<org.mapstruct.version>1.6.2</org.mapstruct.version>
+		<org.mapstruct.version>1.6.3</org.mapstruct.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<spring-cloud.version>2023.0.3</spring-cloud.version>
 	</properties>
 
@@ -107,7 +108,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok-mapstruct-binding</artifactId>
-			<version>0.2.0</version>
+			<version>${lombok-mapstruct-binding.version}</version>
 		</dependency>
 
 		<!-- Mapstruct -->
@@ -123,7 +124,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>2023.0.3</version>
+				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -169,7 +170,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok-mapstruct-binding</artifactId>
-							<version>0.2.0</version>
+							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
