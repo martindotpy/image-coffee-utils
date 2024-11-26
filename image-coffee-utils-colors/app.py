@@ -12,7 +12,7 @@ app: FastAPI = FastAPI(
     docs_url="/api/v0/colors/docs",
     version="0.0.1",
     openapi_tags=[
-        {"name": "colors", "description": "Operations related to colors"}
+        {"name": "colors", "description": "Operations related to colors"},
     ],
     openapi_url="/api/v0/colors/openapi.json",
     redoc_url="/api/v0/colors/redoc",
@@ -37,4 +37,5 @@ if __name__ == "__main__":
         port=PORT,
         host=IP,
         reload="dev" in PROFILES,
+        server_header=False,
     )
