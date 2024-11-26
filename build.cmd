@@ -1,11 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-rem Define the java microservices
-set elements=image-coffee-utils-config image-coffee-utils-eureka image-coffee-utils-gateway image-coffee-utils-ui
+echo Building the project
 
-for %%e in (%elements%) do (
-    start cmd /c "mvn -f %%e clean install spring-boot:build-image -DskipTests"
-)
+call ./mvnw clean install spring-boot:build-image -DskipTests
 
 endlocal
