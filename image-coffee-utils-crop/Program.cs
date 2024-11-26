@@ -1,41 +1,34 @@
-using Microsoft.Extensions.Options;
+using System.Net;
+using image_coffee_utils_crop.Utils;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Use SPRING_CLOUD_CONFIG_URI if is set
-var defaultLogLevel = builder.Configuration["spring:cloud:config:uri"];
-var envLogLevel = Environment.GetEnvironmentVariable("SPRING_CLOUD_CONFIG_URI");
-if (!string.IsNullOrEmpty(envLogLevel))
-{
-    builder.Configuration.AddInMemoryCollection(
-        initialData: new Dictionary<string, string?> { { "spring:cloud:config:uri", envLogLevel } }
-    );
-}
-else
-{
-    builder.Configuration.AddInMemoryCollection(
-        new Dictionary<string, string?> { { "spring:cloud:config:uri", defaultLogLevel } }
-    );
-}
-
 // Config server
+ConfigurationUtils.UseEnvVariableOrDefault("SPRING_CLOUD_CONFIG_URI", "spring:cloud:config:uri", builder.Configuration);
 builder.Configuration.AddConfigServer(builder.Environment);
 
-var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-var localIp = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString() ?? "127.0.0.1";
-var port = builder.Configuration.GetValue<int>("server:port");
+// Server
+IPHostEntry host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+string localIp = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString() ?? "127.0.0.1";
+int port = builder.Configuration.GetValue<int>("server:port");
 string path = builder.Configuration.GetValue<string>("server:servlet:context-path") ?? string.Empty;
 path = path.StartsWith('/') ? path[1..] : path;
 
 builder.WebHost.UseUrls($"http://{localIp}:{port}");
 
+// Eureka client
+ConfigurationUtils.UseEnvVariableOrDefault("SPRING_CLOUD_EUREKA_HOSTNAME", "eureka:instance:hostname", builder.Configuration);
+string eurekaUrl = builder.Configuration.GetValue<string>("eureka:client:serviceUrl") ?? "http://localhost:8761/eureka";
+string eurekaHostName = builder.Configuration.GetValue<string>("eureka:instance:hostname") ?? "localhost";
+eurekaUrl = eurekaUrl.Replace("${eureka.instance.hostname}", eurekaHostName);
+builder.Configuration["eureka:client:serviceUrl"] = eurekaUrl;
 
-// Eureka server
 builder.Services.AddDiscoveryClient(builder.Configuration);
 builder.Services.AddConfigurationDiscoveryClient(builder.Configuration);
 
+// Swagger and controllers
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -61,29 +54,22 @@ app.Map("/info", appBuilder =>
     });
 });
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+app.UseSwagger(options =>
 {
-    app.UseSwagger(options =>
-    {
-        options.RouteTemplate = $"{path}/docs/{{documentName}}/swagger.json";
-    });
-    app.UseSwaggerUI(options =>
-    {
-        options.RoutePrefix = $"{path}/docs";
-        options.SwaggerEndpoint($"/{path}/docs/v0/swagger.json", "API V1");
-    });
-}
+    options.RouteTemplate = $"{path}/docs/{{documentName}}/swagger.json";
+});
+app.UseSwaggerUI(options =>
+{
+    options.RoutePrefix = $"{path}/docs";
+    options.SwaggerEndpoint($"/{path}/docs/v0/swagger.json", "API V1");
+});
 
 app.UsePathBase($"/{path}");
 app.UseRouting();
 
-app.UseHttpsRedirection();
-app.UseAuthorization();
-
 app.MapControllers();
 
-var banner = System.IO.File.ReadAllText("banner.txt");
+string banner = System.IO.File.ReadAllText("./banner.txt");
 Console.WriteLine(banner);
 
 app.Run();
