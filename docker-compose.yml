@@ -31,7 +31,7 @@ services:
         environment:
             - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
             - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
-        entrypoint: ["sh", "-c", "sleep 8 && /cnb/process/web"]
+        entrypoint: ["sh", "-c", "sleep 10 && /cnb/process/web"]
 
     image-coffee-utils-ui:
         image: "image-coffee-utils-ui:0.0.1-SNAPSHOT"
@@ -59,6 +59,22 @@ services:
             - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
             - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
         entrypoint: ["sh", "-c", "sleep 12 && python app.py"]
+
+    image-coffee-utils-crop:
+        image: "image-coffee-utils-crop:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-crop
+        build:
+            context: ./image-coffee-utils-crop
+            dockerfile: Dockerfile
+        networks:
+            - image-coffee-utils-network
+        depends_on:
+            - image-coffee-utils-gateway
+        environment:
+            - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
+            - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
+        entrypoint:
+            ["sh", "-c", "sleep 12 && dotnet image-coffee-utils-crop.dll"]
 
 networks:
     image-coffee-utils-network:
