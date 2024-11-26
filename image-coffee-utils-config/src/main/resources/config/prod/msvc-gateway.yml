@@ -29,6 +29,8 @@ spring:
           uri: lb://msvc-ui
           predicates:
             - Path=/**
+          filters:
+            - LoggingFilter
             - StripPrefix=0
 
       globalcors:
