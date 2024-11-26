@@ -23,7 +23,7 @@ echo -e "alias gps=\"git push\"" >>~/.zshrc
 echo -e "alias gst=\"git status\"" >>~/.zshrc
 
 # Build java microservices
-./mvnw.sh clean install -DskipTests &
+./mvnw clean install -DskipTests &
 
 # Build python microservices
 python -m pip install --upgrade pip

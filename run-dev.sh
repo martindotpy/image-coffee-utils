@@ -5,25 +5,25 @@ mkdir -p logs
 
 # Run the config server
 echo "Running the config server: ${PREFIX}config"
-./mvnw.sh -f ${PREFIX}config clean install spring-boot:run -q -DskipTests >logs/config.log 2>&1 &
+./mvnw -f ${PREFIX}config clean install spring-boot:run -q -DskipTests >logs/config.log 2>&1 &
 
 sleep 10
 
 # Run the eureka server
 echo "Running the eureka server: ${PREFIX}eureka"
-./mvnw.sh -f ${PREFIX}eureka clean install spring-boot:run -q -DskipTests >logs/eureka.log 2>&1 &
+./mvnw -f ${PREFIX}eureka clean install spring-boot:run -q -DskipTests >logs/eureka.log 2>&1 &
 
 sleep 5
 
 # Run the gateway server
 echo "Running the gateway server: ${PREFIX}gateway"
-./mvnw.sh -f ${PREFIX}gateway clean install spring-boot:run -q -DskipTests >logs/gateway.log 2>&1 &
+./mvnw -f ${PREFIX}gateway clean install spring-boot:run -q -DskipTests >logs/gateway.log 2>&1 &
 
 sleep 10
 
 # Run the ui service
 echo "Running the ui service: ${PREFIX}ui"
-./mvnw.sh -f ${PREFIX}ui clean install spring-boot:run -q -DskipTests >logs/ui.log 2>&1 &
+./mvnw -f ${PREFIX}ui clean install spring-boot:run -q -DskipTests >logs/ui.log 2>&1 &
 
 # Run the colors service
 echo "Running the colors service: ${PREFIX}colors"
