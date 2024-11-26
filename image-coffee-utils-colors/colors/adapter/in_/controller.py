@@ -3,10 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Annotated
 
 from colors.application.service import (
-    GetMostCommonColorsFromImagePort,  # noqa: TCH002
-    get_most_common_colors_from_image_port,  # noqa: TCH002
+    GetMostCommonColorsFromImagePort,
+    get_most_common_colors_from_image_port,
 )
-from fastapi import APIRouter, Depends, File, Query, UploadFile
+from fastapi import APIRouter, Depends, File, Form, UploadFile
 
 from .response import ErrorResponse, MostCommonColors, MostCommonColorsResponse
 
@@ -30,20 +30,21 @@ route: APIRouter = APIRouter()
 )
 async def get_colors(  # noqa: D417
     image: Annotated[
-        UploadFile, File(..., description="Image to extract colors from")
+        UploadFile,
+        File(..., description="Image to extract colors from"),
     ],
     get_most_common_colors_from_image: Annotated[
         GetMostCommonColorsFromImagePort,
         Depends(get_most_common_colors_from_image_port),
     ],
-    n: Annotated[int, Query(..., description="Number of colors to get")] = 5,
+    n: Annotated[int, Form(..., description="Number of colors to get")] = 5,
 ) -> ErrorResponse | MostCommonColorsResponse:
     """Extract the most common colors from an image.
 
     Args:
 
         image (UploadFile): Image to extract colors from
-        n (int): Number of colors
+        n (int): Number of colors (default 5 and max 20)
 
     Returns:
 
@@ -52,6 +53,10 @@ async def get_colors(  # noqa: D417
     """  # noqa: D412
     if not image:
         return ErrorResponse(detail="Image not received")
+    if n < 1:
+        return ErrorResponse(detail="Invalid number of colors")
+    if n > 20:
+        return ErrorResponse(detail="Number of colors must be less than 20")
 
     image_contents = await image.read()
     result: Result[list[MostCommonColors], ColorsFailure] = (

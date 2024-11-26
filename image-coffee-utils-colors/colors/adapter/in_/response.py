@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from colors.domain.model import MostCommonColors  # noqa: TCH002
+from colors.domain.model import MostCommonColors  # noqa: TC002
 from pydantic import BaseModel
 
 
