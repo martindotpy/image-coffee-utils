@@ -21,16 +21,14 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
+            String method = request.getMethod().name();
             String realIP = request.getHeaders().getFirst("X-Real-IP");
             String path = request.getURI().getPath();
 
-            if (realIP != null &&
-                    !(path.equals("/") ||
-                            path.equals("/favicon.ico") ||
-                            path.startsWith("/assets")))
+            if (realIP != null && !(path.equals("/") || path.equals("/favicon.ico") || path.startsWith("/assets")))
                 log.info(String.format(
                         "\u001B[35m%s\u001B[0m to \u001B[35m%s\u001B[0m from \u001B[35m%s\u001B[0m IP",
-                        request.getMethod(),
+                        method,
                         path,
                         realIP));
 
