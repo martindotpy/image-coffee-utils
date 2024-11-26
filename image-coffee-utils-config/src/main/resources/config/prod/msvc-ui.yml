@@ -2,9 +2,6 @@ server:
   port: 8090
 
 spring:
-  application:
-    name: msvc-ui
-
   mvc:
     view:
       suffix: .xhtml

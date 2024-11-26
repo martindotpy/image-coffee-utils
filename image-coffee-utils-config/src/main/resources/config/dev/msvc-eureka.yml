@@ -1,10 +1,6 @@
 server:
   port: 8761
 
-spring:
-  application:
-    name: msvc-eureka
-
 eureka:
   instance:
     hostname: localhost

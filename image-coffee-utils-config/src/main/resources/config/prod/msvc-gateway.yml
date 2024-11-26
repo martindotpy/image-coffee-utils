@@ -2,9 +2,6 @@ server:
   port: 8080
 
 spring:
-  application:
-    name: msvc-gateway
-
   cloud:
     gateway:
       discovery:
@@ -18,11 +15,21 @@ spring:
             - Path=/api/v0/colors/**
           filters:
             - LoggingFilter
+            - StripPrefix=0
+
+        - id: crop
+          uri: lb://msvc-crop
+          predicates:
+            - Path=/api/v0/crop/**
+          filters:
+            - LoggingFilter
+            - StripPrefix=0
 
         - id: ui
           uri: lb://msvc-ui
           predicates:
             - Path=/**
+            - StripPrefix=0
 
       globalcors:
         corsConfigurations:
