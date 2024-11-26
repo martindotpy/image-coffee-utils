@@ -1,3 +1,12 @@
+# VS Code
+.vscode
+
+# Github
+.github
+
+# Dev container
+.devcontainer
+
 # Java
 target
 *.class
@@ -5,7 +14,16 @@ target
 # Python
 __pycache__
 *.pyc
+*.lock
 
 # C#
 bin
 obj
+
+# Scripts
+*.cmd
+
+# Logs
+var/logs
+logs
+*.log
