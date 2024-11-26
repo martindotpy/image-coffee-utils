@@ -23,7 +23,7 @@ build/
 dist/
 
 # VS Code
-.vscode
+.vscode/
 
 ### IntelliJ IDEA
 .idea
