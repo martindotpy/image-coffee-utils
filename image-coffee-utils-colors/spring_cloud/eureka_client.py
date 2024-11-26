@@ -3,15 +3,15 @@ import os
 from py_eureka_client import eureka_client
 
 
-def register_eureka(config: dict, ip: str, host: str) -> None:
+def register_eureka(app_name: str, config: dict, ip: str) -> None:
     """Register the service in Eureka server.
 
     Args:
+        app_name (str): Name of the service.
         config (dict): Configuration of the service. All the configuration is\
             in the application.yml file provided by the Spring Cloud Config\
             Server.
         ip (str): IP of the host.
-        host (str): Hostname of the host.
 
     """
     eureka_instance_hostname: str = config["eureka"]["instance"]["hostname"]
@@ -34,8 +34,8 @@ def register_eureka(config: dict, ip: str, host: str) -> None:
 
     eureka_client.init(
         eureka_server=eureka_server,
-        app_name=config["spring"]["application"]["name"],
+        app_name=app_name,
         instance_port=config["server"]["port"],
         instance_host=ip,
-        instance_id=f"{host}:{config['spring']['application']['name']}:{config['server']['port']}",
+        instance_id=f"{ip}:{app_name}:{config['server']['port']}",
     )

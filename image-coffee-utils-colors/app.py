@@ -4,23 +4,23 @@ from multiprocessing import freeze_support
 import uvicorn
 from fastapi import FastAPI
 from routes import dependencies, routes
-from spring_cloud import IP, PORT, PROFILES, init_spring_config
+from spring_cloud import IP, PATH, PORT, PROFILES, init_spring_config
 
 app: FastAPI = FastAPI(
-    title="Image Coffee Utils Colors",
-    description="API to extract the most common colors from an image.",
-    docs_url="/api/v0/colors/docs",
+    title="Image Coffee Utils Colors API",
+    description="API for extracting the most common colors from an image.",
+    docs_url=f"{PATH}/docs",
     version="0.0.1",
     openapi_tags=[
-        {"name": "colors", "description": "Operations related to colors"},
+        {"name": "colors", "description": "Colors operations with images"},
     ],
-    openapi_url="/api/v0/colors/openapi.json",
-    redoc_url="/api/v0/colors/redoc",
+    openapi_url=f"{PATH}/openapi.json",
+    redoc_url=f"{PATH}/redoc",
     dependencies=dependencies,
 )
 
 for router in routes:
-    app.include_router(router, prefix="/api/v0/colors")
+    app.include_router(router, prefix=f"{PATH}")
 
 
 if __name__ == "__main__":

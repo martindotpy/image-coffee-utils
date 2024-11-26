@@ -1,4 +1,4 @@
-from .config_client import HOST, IP, _config
+from .config_client import APP_NAME, IP, PATH, PORT, PROFILES, _config
 from .eureka_client import register_eureka
 
 
@@ -7,7 +7,7 @@ def init_spring_config() -> None:
 
     All the arguments are in the `config_client.py` file.
     """
-    register_eureka(_config, IP, HOST)
+    register_eureka(APP_NAME, _config, IP)
 
 
-__all__ = ["init_spring_config"]
+__all__ = ["IP", "PATH", "PORT", "PROFILES", "init_spring_config"]
