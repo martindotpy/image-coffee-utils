@@ -23,7 +23,7 @@ Windows:
 Linux:
 
 ```bash
-./run-dev
+./run-dev.sh
 ```
 
 ### Production
@@ -40,7 +40,7 @@ Windows:
 Linux:
 
 ```bash
-./build
+./build.sh
 ```
 
 This command will build the Docker images of Spring Microservices (Docker
@@ -58,6 +58,13 @@ The backend is built with Spring Cloud, leveraging Spring Cloud Config, Spring
 Cloud Eureka, and Spring Cloud Gateway, and provides the following
 microservices:
 
+> [!NOTE]
+>
+> - The notation `<api-version>` refers to the version of the API. For example,
+>   `v1`, always start with `v`.
+> - The notation `-F` refers to form data.
+> - The notation `<value:default>` refers to the default value of the parameter.
+
 ### Colors
 
 This microservice extracts the main colors from an image. It is built with
@@ -67,19 +74,19 @@ Python using FastAPI and Scikit-learn.
 
 The entry point is `/api/<api-version>/colors`.
 
-- `POST /n=<colors-to-extract-from-the-image>`: Extracts the main colors from
-  the image. In the request body, you should send the image as a form-data file.
+- `POST -F image=<image> -F n=<number-of_colors:5>`: Extracts the `n` main
+  colors from the image.
 
 ### Crop
 
-This microservice crops an image. It is built with Java using Spring Boot.
+This microservice crops an image. It is built with C# using ASP.NET Core.
 
 #### Endpoints
 
 The entry point is `/api/<api-version>/crop`.
 
-- `GET /<image_base64>?x=<x>&y=<y>&width=<width>&height=<height>`: Crops the
-  image.
+- `POST -F image=<image> -F x=<x:0> -F y=<y:0> -F width=<width> -F height=<height>`:
+  Crops the image.
 
 ### Resize
 
@@ -89,7 +96,8 @@ This microservice resizes an image. It is built with Java using Spring Boot.
 
 The entry point is `/api/<api-version>/resize`.
 
-- `GET /<image_base64>?width=<width>&height=<height>`: Resizes the image.
+- `POST -F image=<image> -F width=<width> -F height=<height>`: Resizes the
+  image.
 
 ### Adjust Dimensions
 
@@ -100,8 +108,8 @@ using Spring Boot.
 
 The entry point is `/api/<api-version>/adjust-dimensions`.
 
-- `GET /<image_base64>?width=<width>&height=<height>`: Adjusts the dimensions of
-  the image.
+- `POST -F image=<image> -F width=<width> -F height=<height>`: Adjusts the size
+  of the image.
 
 ### Invert Colors
 
@@ -112,4 +120,4 @@ Spring Boot.
 
 The entry point is `/api/<api-version>/invert-colors`.
 
-- `GET /<image_base64>`: Inverts the colors of the image.
+- `POST -F image=<image>`: Inverts the colors of the image.
