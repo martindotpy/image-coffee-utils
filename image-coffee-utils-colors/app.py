@@ -19,6 +19,20 @@ app: FastAPI = FastAPI(
     dependencies=dependencies,
 )
 
+
+@app.get("/info")
+def info() -> dict:
+    """Return the status of the service.
+
+    Returns:
+        dict: The status of the service.
+
+    """
+    return {
+        "status": "UP",
+    }
+
+
 for router in routes:
     app.include_router(router, prefix=f"{PATH}")
 
