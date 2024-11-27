@@ -28,3 +28,9 @@ echo "Running the ui service: ${PREFIX}ui"
 # Run the colors service
 echo "Running the colors service: ${PREFIX}colors"
 cd ${PREFIX}colors && poetry install && poetry run python app.py >logs/colors.log 2>&1 &
+
+cd ..
+
+# Run the crop service
+echo "Running the crop service: ${PREFIX}crop"
+cd ${PREFIX}crop && dotnet watch run >logs/crop.log 2>&1 &
