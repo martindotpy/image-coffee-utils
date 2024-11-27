@@ -19,15 +19,23 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             sudo fuser -k 8081/tcp || echo "No process running on port 8081"
-            cd /home/${{ secrets.USER }}/image-coffee-utils
-            docker compose down
-            sleep 5 && \
-            chmod -R 755 ./remove-images-containeres.sh && \
-            ./remove-images-containeres.sh && \
-            rm -rf /home/${{ secrets.USER }}/image-coffee-utils
+            if [ -d "/home/${{ secrets.USER }}/image-coffee-utils" ]; then
+                cd /home/${{ secrets.USER }}/image-coffee-utils
+                docker compose down
 
-      - name: Sleep for 5 seconds
-        run: sleep 5
+                sleep 5
+            else
+                echo "Directory /home/${{ secrets.USER }}/image-coffee-utils does not exist"
+            fi
+
+            if [ -f "./remove-images-containers.sh" ]; then
+                chmod -R 755 ./remove-images-containers.sh
+                ./remove-images-containers.sh
+            else
+                echo "File ./remove-images-containers.sh does not exist"
+            fi
+
+            rm -rf /home/${{ secrets.USER }}/image-coffee-utils
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -51,9 +59,10 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.USER }}/image-coffee-utils
-            nohup bash -c 'docker build --network host -t image-coffee-utils:0.0.1-SNAPSHOT . && \
-                docker run --privileged \
-                -v "/var/run/docker.sock":"/var/run/docker.sock" --rm \
-                --name image-coffee-utils \
+            nohup bash -c 'docker build --network host \
+                -t image-coffee-utils:0.0.1-SNAPSHOT . && \
+                docker run --network host \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                --rm --name image-coffee-utils \
                 -t image-coffee-utils:0.0.1-SNAPSHOT' \
                 > output.log 2>&1 &
