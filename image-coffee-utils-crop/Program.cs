@@ -14,8 +14,8 @@ builder.Configuration.AddConfigServer(builder.Environment);
 IPHostEntry host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
 string localIp = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString() ?? "127.0.0.1";
 int port = builder.Configuration.GetValue<int>("server:port");
-string path = builder.Configuration.GetValue<string>("server:servlet:context-path") ?? string.Empty;
-path = path.StartsWith('/') ? path[1..] : path;
+string basePath = builder.Configuration.GetValue<string>("server:servlet:context-path") ?? string.Empty;
+basePath = basePath.StartsWith('/') ? basePath[1..] : basePath;
 
 builder.WebHost.UseUrls($"http://{localIp}:{port}");
 
@@ -34,7 +34,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v0", new Microsoft.OpenApi.Models.OpenApiInfo
+    options.SwaggerDoc("v0", new OpenApiInfo
     {
         Title = "Image Coffee Utils Crop API",
         Version = "v0.0.1",
@@ -57,24 +57,31 @@ app.Map("/info", appBuilder =>
 
 app.UseSwagger(options =>
 {
-    options.RouteTemplate = $"{path}/docs/{{documentName}}/swagger.json";
+    options.RouteTemplate = $"{basePath}/docs/{{documentName}}/swagger.json";
     options.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+    {
+        var paths = new OpenApiPaths();
+
+        foreach (var path in swaggerDoc.Paths)
         {
-            swaggerDoc.Servers = [new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/{path}" }];
-        });
+            paths.Add($"/{basePath}{path.Key}", path.Value);
+        }
+
+        swaggerDoc.Paths = paths;
+    });
 });
 app.UseSwaggerUI(options =>
 {
-    options.RoutePrefix = $"{path}/docs";
-    options.SwaggerEndpoint($"/{path}/docs/v0/swagger.json", "API V1");
+    options.RoutePrefix = $"{basePath}/docs";
+    options.SwaggerEndpoint($"/{basePath}/docs/v0/swagger.json", "API V1");
 });
 
-app.UsePathBase($"/{path}");
+app.UsePathBase($"/{basePath}");
 app.UseRouting();
 
 app.MapControllers();
 
-string banner = System.IO.File.ReadAllText("./banner.txt");
+string banner = File.ReadAllText("./banner.txt");
 Console.WriteLine(banner);
 
 app.Run();

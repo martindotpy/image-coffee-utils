@@ -116,18 +116,6 @@ cropping, or color inversion.
 
   _Resizes the image to the specified dimensions._
 
-#### Adjust Dimensions
-
-- **Endpoint:** `/api/<api-version>/adjust-dimensions`
-- **Method:** `POST`
-- **Parameters:**
-
-  - `-F image=<image>`: The image file to adjust.
-  - `-F width=<width>`: The new width of the image.
-  - `-F height=<height>`: The new height of the image.
-
-  _Adjusts the size of the image to the specified width and height._
-
 #### Invert Colors
 
 - **Endpoint:** `/api/<api-version>/invert-colors`
