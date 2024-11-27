@@ -3,7 +3,7 @@ FROM docker:latest
 WORKDIR /app
 
 # Install docker compose
-RUN apk update && apk add --no-cache docker-compose bash
+RUN apk add --no-cache docker-compose bash
 
 # Install java 21 corretto
 RUN apk add --no-cache && \

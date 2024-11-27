@@ -21,9 +21,9 @@ jobs:
             sudo fuser -k 8081/tcp || echo "No process running on port 8081"
             cd /home/${{ secrets.USER }}/image-coffee-utils
             docker compose down
-            sleep 5
-            chmod -R 755 ./remove-images-containeres.sh
-            ./remove-images-containeres.sh
+            sleep 5 && \
+            chmod -R 755 ./remove-images-containeres.sh && \
+            ./remove-images-containeres.sh && \
             rm -rf /home/${{ secrets.USER }}/image-coffee-utils
 
       - name: Sleep for 5 seconds
@@ -51,7 +51,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.USER }}/image-coffee-utils
-            nohup bash -c 'docker build -t image-coffee-utils:0.0.1-SNAPSHOT . && \
+            nohup bash -c 'docker build --network host -t image-coffee-utils:0.0.1-SNAPSHOT . && \
                 docker run --privileged \
                 -v "/var/run/docker.sock":"/var/run/docker.sock" --rm \
                 --name image-coffee-utils \
