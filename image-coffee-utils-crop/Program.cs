@@ -1,5 +1,6 @@
 using System.Net;
 using image_coffee_utils_crop.Utils;
+using Microsoft.OpenApi.Models;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 
@@ -57,6 +58,10 @@ app.Map("/info", appBuilder =>
 app.UseSwagger(options =>
 {
     options.RouteTemplate = $"{path}/docs/{{documentName}}/swagger.json";
+    options.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+        {
+            swaggerDoc.Servers = [new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/{path}" }];
+        });
 });
 app.UseSwaggerUI(options =>
 {

@@ -6,7 +6,7 @@ namespace image_coffee_utils_crop.Crop.Adapter.In.Controller
     /// Crop controller.
     /// </summary>
     [ApiController]
-    [Route("api/v0/crop")]
+    [Route("/")]
     public class CropController(ILogger<CropController> logger) : ControllerBase
     {
         private readonly ILogger<CropController> _logger = logger;
