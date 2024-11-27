@@ -20,7 +20,7 @@ app: FastAPI = FastAPI(
 )
 
 
-@app.get("/info")
+@app.get("/info", include_in_schema=False)
 def info() -> dict:
     """Return the status of the service.
 
