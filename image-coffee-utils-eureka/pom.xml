@@ -70,13 +70,6 @@
 							<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
 							<BPE_APPEND_JAVA_TOOL_OPTIONS xml:space="preserve"> -Dspring.profiles.active="prod, native"</BPE_APPEND_JAVA_TOOL_OPTIONS>
 						</env>
-						<buildpacks>
-							<buildpack>paketobuildpacks/amazon-corretto</buildpack>
-							<buildpack>urn:cnb:builder:paketo-buildpacks/syft</buildpack>
-							<buildpack>urn:cnb:builder:paketo-buildpacks/executable-jar</buildpack>
-							<buildpack>urn:cnb:builder:paketo-buildpacks/spring-boot</buildpack>
-						</buildpacks>
-						<builder>paketobuildpacks/builder-jammy-base</builder>
 					</image>
 				</configuration>
 			</plugin>
