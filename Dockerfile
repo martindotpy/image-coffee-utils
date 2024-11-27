@@ -3,9 +3,9 @@ FROM docker:latest
 WORKDIR /app
 
 # Install docker compose
-RUN apk add --no-cache docker-compose bash
+RUN apk update && apk add --no-cache docker-compose bash
 
-# Install java 21 correto
+# Install java 21 corretto
 RUN apk add --no-cache && \
     wget -O /etc/apk/keys/amazoncorretto.rsa.pub https://apk.corretto.aws/amazoncorretto.rsa.pub && \
     echo "https://apk.corretto.aws" >> /etc/apk/repositories && \
