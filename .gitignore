@@ -25,13 +25,13 @@ dist/
 # VS Code
 .vscode/
 
-### IntelliJ IDEA
+# IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -45,10 +45,7 @@ build/
 logs
 *.log
 
-# Saved images by the server
-img
-
-### STS
+# STS
 .apt_generated
 .classpath
 .factorypath
