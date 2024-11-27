@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using image_coffee_utils_crop.Crop.Adapter.In.Response;
-using image_coffee_utils_crop.Crop.Application.Port.In;
+using ImageCoffeeUtilsCrop.Crop.Adapter.In.Response;
+using ImageCoffeeUtilsCrop.Crop.Application.Port.In;
 using Microsoft.AspNetCore.Mvc;
 
-namespace image_coffee_utils_crop.Crop.Adapter.In.Controller
+namespace ImageCoffeeUtilsCrop.Crop.Adapter.In.Controller
 {
     /// <summary>
     /// Crop controller.

@@ -1,4 +1,4 @@
-namespace image_coffee_utils_crop.Crop.Adapter.In.Utils
+namespace ImageCoffeeUtilsCrop.Crop.Adapter.In.Utils
 {
     /// <summary>
     /// Configuration utilities.

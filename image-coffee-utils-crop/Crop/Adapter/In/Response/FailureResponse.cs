@@ -1,4 +1,4 @@
-namespace image_coffee_utils_crop.Crop.Adapter.In.Response
+namespace ImageCoffeeUtilsCrop.Crop.Adapter.In.Response
 {
     /// <summary>
     /// Failure response.

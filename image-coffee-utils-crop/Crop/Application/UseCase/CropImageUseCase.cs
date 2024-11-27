@@ -1,11 +1,11 @@
-using image_coffee_utils_crop.Crop.Application.Port.In;
+using ImageCoffeeUtilsCrop.Crop.Application.Port.In;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Processing;
 
-namespace image_coffee_utils_crop.Crop.Application.UseCase
+namespace ImageCoffeeUtilsCrop.Crop.Application.UseCase
 {
     /// <summary>
     /// Crop image use case, implements <see cref="ICropImagePort"/>.

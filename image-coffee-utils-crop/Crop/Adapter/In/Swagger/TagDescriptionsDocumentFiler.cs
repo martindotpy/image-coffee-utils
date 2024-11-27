@@ -1,7 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace image_coffee_utils_crop.Crop.Adapter.In.Swagger
+namespace ImageCoffeeUtilsCrop.Crop.Adapter.In.Swagger
 {
     /// <summary>
     /// Filter to add descriptions to tags

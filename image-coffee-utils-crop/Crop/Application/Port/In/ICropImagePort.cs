@@ -1,4 +1,4 @@
-namespace image_coffee_utils_crop.Crop.Application.Port.In
+namespace ImageCoffeeUtilsCrop.Crop.Application.Port.In
 {
     /// <summary>
     /// Crop image port.

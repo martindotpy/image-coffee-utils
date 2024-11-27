@@ -1,9 +1,9 @@
 using System.Net;
 using System.Reflection;
-using image_coffee_utils_crop.Crop.Adapter.In.Swagger;
-using image_coffee_utils_crop.Crop.Adapter.In.Utils;
-using image_coffee_utils_crop.Crop.Application.Port.In;
-using image_coffee_utils_crop.Crop.Application.UseCase;
+using ImageCoffeeUtilsCrop.Crop.Adapter.In.Swagger;
+using ImageCoffeeUtilsCrop.Crop.Adapter.In.Utils;
+using ImageCoffeeUtilsCrop.Crop.Application.Port.In;
+using ImageCoffeeUtilsCrop.Crop.Application.UseCase;
 using Microsoft.OpenApi.Models;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.ConfigServer;
