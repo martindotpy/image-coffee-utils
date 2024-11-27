@@ -97,10 +97,10 @@ cropping, or color inversion.
 - **Parameters:**
 
   - `-F image=<image>`: The image file to crop.
-  - `-F x=<x:0>`: X coordinate for the top-left corner of the crop.
-  - `-F y=<y:0>`: Y coordinate for the top-left corner of the crop.
-  - `-F width=<width>`: The width of the cropped area.
-  - `-F height=<height>`: The height of the cropped area.
+  - `-F x=<x>`: X coordinate for the top-left corner of the crop.
+  - `-F y=<y>`: Y coordinate for the top-left corner of the crop.
+  - `-F width=<width:image-width>`: The width of the cropped area.
+  - `-F height=<height:image-height>`: The height of the cropped area.
 
   _Crops the image based on the specified coordinates and dimensions._
 
