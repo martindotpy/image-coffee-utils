@@ -13,14 +13,14 @@ target
 
 # Python
 __pycache__
-*.pyc
-*.lock
+**_/*.lock
+**_/*.pyc
 
 # C#
 bin
 obj
 
-# Scripts
+# Windows scripts
 *.cmd
 
 # Logs

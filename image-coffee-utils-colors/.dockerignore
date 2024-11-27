@@ -1,3 +1,4 @@
 # Cache
 __pycache__
 poetry.lock
+**/*.pyc
