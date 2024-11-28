@@ -59,13 +59,12 @@ upload images and perform various operations using backend microservices.
 
 The backend uses Spring Cloud to deliver scalable services, including:
 
-| Service               | Technology       | Endpoint Example                       | OpenAPI Docs                                                                                               |
-| --------------------- | ---------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Colors**            | Python (FastAPI) | `/api/<api-version>/colors`            | [`api/v0/colors/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/colors/docs)                       |
-| **Crop**              | C# (ASP.NET)     | `/api/<api-version>/crop`              | [`api/v0/crop/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/crop/docs)                           |
-| **Resize**            | Java (Spring)    | `/api/<api-version>/resize`            | [`api/v0/resize/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/resize/docs)                       |
-| **Adjust Dimensions** | Java (Spring)    | `/api/<api-version>/adjust-dimensions` | [`api/v0/adjust-dimensions/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/adjust-dimensions/docs) |
-| **Invert Colors**     | Java (Spring)    | `/api/<api-version>/invert-colors`     | [`api/v0/invert-colors/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/invert-colors/docs)         |
+| Service           | Technology       | Endpoint Example                   | OpenAPI Docs                                                                                       |
+| ----------------- | ---------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Colors**        | Python (FastAPI) | `/api/<api-version>/colors`        | [`api/v0/colors/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/colors/docs)               |
+| **Crop**          | C# (ASP.NET)     | `/api/<api-version>/crop`          | [`api/v0/crop/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/crop/docs)                   |
+| **Resize**        | Java (Spring)    | `/api/<api-version>/resize`        | [`api/v0/resize/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/resize/docs)               |
+| **Invert Colors** | Java (Spring)    | `/api/<api-version>/invert-colors` | [`api/v0/invert-colors/docs`](https://image-coffee-utils.cupscoffee.xyz/api/v0/invert-colors/docs) |
 
 Each service processes images based on specific operations such as resizing,
 cropping, or color inversion.
