@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
 
 /**
- * Indicates that annotated class is a <em>PersistanceAdapter</em>.
+ * Indicates that annotated class is a <em>PersistenceAdapter</em>.
  *
  * <p>
- * Represents a persistance adapter component. This annotation serves as a
+ * Represents a Persistence adapter component. This annotation serves as a
  * specialization of Spring's {@link @Adapter}, allowing for
  * implementation classes to be auto-detected through classpath scanning by
  * Spring.
@@ -22,7 +22,7 @@ import org.springframework.core.annotation.AliasFor;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Adapter
-public @interface PersistanceAdapter {
+public @interface PersistenceAdapter {
     @AliasFor(annotation = Adapter.class)
     String value() default "";
 }
