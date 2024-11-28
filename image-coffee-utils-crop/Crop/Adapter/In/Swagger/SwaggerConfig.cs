@@ -51,7 +51,8 @@ namespace ImageCoffeeUtilsCrop.Crop.Adapter.In.Swagger
 
                         foreach (var path in swaggerDoc.Paths)
                         {
-                            paths.Add($"/{basePath}{path.Key}", path.Value);
+                            string key = path.Key.EndsWith('/') ? path.Key[..^1] : path.Key;
+                            paths.Add($"/{basePath}{key}", path.Value);
                         }
 
                         swaggerDoc.Paths = paths;
