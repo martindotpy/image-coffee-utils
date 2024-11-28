@@ -53,9 +53,17 @@ app.Map(
 );
 
 SwaggerConfigurer.Use(app, basePath);
-app.UsePathBase($"/{basePath}");
+app.Map(
+    $"/{basePath}",
+    appBuilder =>
+    {
+        appBuilder.UseRouting();
+        appBuilder.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+    }
+);
 app.UseRouting();
-
-app.MapControllers();
 
 app.Run();
