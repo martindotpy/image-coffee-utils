@@ -11,7 +11,6 @@ public class ResizeResponse {
         this.resizedImage = resizedImage;
     }
 
-    // Getters y setters
     public boolean isSuccess() {
         return success;
     }

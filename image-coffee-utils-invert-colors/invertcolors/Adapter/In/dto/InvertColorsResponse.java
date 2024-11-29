@@ -1,17 +1,16 @@
-package com.imagecoffee.resize.dto;
+package com.imagecoffee.invertcolors.dto;
 
-public class ResizeResponse {
+public class InvertColorsResponse {
     private boolean success;
     private String message;
-    private byte[] resizedImage;
+    private byte[] invertedImage;
 
-    public ResizeResponse(boolean success, String message, byte[] resizedImage) {
+    public InvertColorsResponse(boolean success, String message, byte[] invertedImage) {
         this.success = success;
         this.message = message;
-        this.resizedImage = resizedImage;
+        this.invertedImage = invertedImage;
     }
 
-    // Getters y setters
     public boolean isSuccess() {
         return success;
     }
@@ -28,11 +27,12 @@ public class ResizeResponse {
         this.message = message;
     }
 
-    public byte[] getResizedImage() {
-        return resizedImage;
+    public byte[] getInvertedImage() {
+        return invertedImage;
     }
 
-    public void setResizedImage(byte[] resizedImage) {
-        this.resizedImage = resizedImage;
+    public void setInvertedImage(byte[] invertedImage) {
+        this.invertedImage = invertedImage;
     }
 }
+
