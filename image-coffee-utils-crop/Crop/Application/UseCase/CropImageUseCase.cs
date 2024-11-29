@@ -25,6 +25,9 @@ namespace ImageCoffeeUtilsCrop.Crop.Application.UseCase
             int cropWidth = Math.Min(width ?? image.Width, image.Width);
             int cropHeight = Math.Min(height ?? image.Height, image.Height);
 
+            cropWidth = Fit(x, cropWidth, image.Width);
+            cropHeight = Fit(y, cropHeight, image.Height);
+
             var croppedRect = new Rectangle(x, y, cropWidth, cropHeight);
             image.Mutate(x => x.Crop(croppedRect));
 
@@ -50,6 +53,23 @@ namespace ImageCoffeeUtilsCrop.Crop.Application.UseCase
             _logger.LogInformation("Image saved");
 
             return memoryStream.ToArray();
+        }
+
+        /// <summary>
+        /// Fit the size of the crop to the image.
+        /// </summary>
+        /// <param name="coordinate">The coordinate to fit</param>
+        /// <param name="size">The size to fit</param>
+        /// <param name="max">The maximum value</param>
+        /// <returns></returns>
+        private static int Fit(int coordinate, int size, int max)
+        {
+            if (coordinate + size > max)
+            {
+                return max - coordinate;
+            }
+
+            return size;
         }
     }
 }
