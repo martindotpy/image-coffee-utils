@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: msvc-ui
+
+  config:
+    import: configserver:${SPRING_CLOUD_CONFIG_URI:http://localhost:8888}
+
+  output:
+    ansi:
+      enabled: always
