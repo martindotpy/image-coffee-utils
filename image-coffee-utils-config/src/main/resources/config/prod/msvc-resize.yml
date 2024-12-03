@@ -5,6 +5,11 @@ server:
     context-path: /api/${spring.api.version}/resize
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
   devtools:
     livereload:
       enabled: false

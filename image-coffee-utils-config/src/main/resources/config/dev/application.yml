@@ -1,5 +1,5 @@
 server:
-  host: localhost:8080
+  host: "localhost:8080"
 
 spring:
   api:
@@ -9,6 +9,7 @@ logging:
   pattern:
     dateformat: HH:mm:ss
     level: "%highlight(%-5level)"
-    console: "%clr(%d{HH:mm:ss}){faint} %highlight(%-5level) ---
+    console:
+      "%clr(%d{HH:mm:ss}){faint} %highlight(%-5level) ---
       [%clr(${spring.application.name:-}){yellow}] %clr(%-45.45logger{45}){cyan}
       %clr(:){faint} %m%n"

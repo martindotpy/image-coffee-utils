@@ -4,6 +4,12 @@ server:
   servlet:
     context-path: /api/${spring.api.version}/resize
 
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
 eureka:
   instance:
     hostname: localhost
@@ -36,8 +42,8 @@ logging:
 springdoc:
   api-docs:
     version: OPENAPI_3_1
-    operationSorter: method
-    tagsSorter: alpha
     server-url: http://${server.host}${server.servlet.context-path}
   swagger-ui:
     path: /docs
+    operationSorter: method
+    tagsSorter: alpha
