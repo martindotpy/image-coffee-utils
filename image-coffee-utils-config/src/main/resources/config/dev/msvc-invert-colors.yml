@@ -1,8 +1,8 @@
 server:
-  port: 8093
+  port: 8094
 
   servlet:
-    context-path: /api/${spring.api.version}/resize
+    context-path: /api/${spring.api.version}/invert-colors
 
 spring:
   servlet:
