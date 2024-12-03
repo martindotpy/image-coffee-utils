@@ -14,7 +14,6 @@ spring:
           predicates:
             - Path=/api/v0/colors/**
           filters:
-            - LoggingFilter
             - StripPrefix=0
 
         - id: crop
@@ -22,7 +21,6 @@ spring:
           predicates:
             - Path=/api/v0/crop/**
           filters:
-            - LoggingFilter
             - StripPrefix=0
 
         - id: resize
@@ -30,7 +28,6 @@ spring:
           predicates:
             - Path=/api/v0/resize/**
           filters:
-            - LoggingFilter
             - StripPrefix=0
 
         - id: invert-colors
@@ -38,7 +35,6 @@ spring:
           predicates:
             - Path=/api/v0/invert-colors/**
           filters:
-            - LoggingFilter
             - StripPrefix=0
 
         - id: ui
@@ -46,7 +42,6 @@ spring:
           predicates:
             - Path=/**
           filters:
-            - LoggingFilter
             - StripPrefix=0
 
       globalcors:
