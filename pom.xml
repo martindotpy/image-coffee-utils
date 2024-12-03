@@ -17,9 +17,11 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>image-coffee-utils-java-shared</module>
         <module>image-coffee-utils-config</module>
         <module>image-coffee-utils-eureka</module>
         <module>image-coffee-utils-gateway</module>
+        <module>image-coffee-utils-resize</module>
         <module>image-coffee-utils-ui</module>
     </modules>
 
