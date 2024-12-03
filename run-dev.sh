@@ -25,6 +25,10 @@ sleep 10
 echo "Running the ui service: ${PREFIX}ui"
 ./mvnw -f ${PREFIX}ui clean install spring-boot:run -q -DskipTests >logs/ui.log 2>&1 &
 
+# Run the resize service
+echo "Running the resize service: ${PREFIX}resize"
+./mvnw -f ${PREFIX}resize clean install spring-boot:run -q -DskipTests >logs/ui.log 2>&1 &
+
 # Run the colors service
 echo "Running the colors service: ${PREFIX}colors"
 cd ${PREFIX}colors && poetry install && poetry run python app.py >logs/colors.log 2>&1 &

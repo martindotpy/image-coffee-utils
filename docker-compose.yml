@@ -45,6 +45,18 @@ services:
             - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
         entrypoint: ["sh", "-c", "sleep 12 && /cnb/process/web"]
 
+    image-coffee-utils-resize:
+        image: "image-coffee-utils-resize:0.0.1-SNAPSHOT"
+        container_name: image-coffee-utils-resize
+        networks:
+            - image-coffee-utils-network
+        depends_on:
+            - image-coffee-utils-gateway
+        environment:
+            - SPRING_CLOUD_CONFIG_URI=http://image-coffee-utils-config:8888
+            - SPRING_CLOUD_EUREKA_HOSTNAME=image-coffee-utils-eureka
+        entrypoint: ["sh", "-c", "sleep 12 && /cnb/process/web"]
+
     image-coffee-utils-colors:
         image: "image-coffee-utils-colors:0.0.1-SNAPSHOT"
         container_name: image-coffee-utils-colors

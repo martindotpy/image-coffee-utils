@@ -23,6 +23,10 @@ timeout /t 10 /nobreak
 echo Running the ui service: %PREFIX%ui
 start cmd /c "call ./mvnw -f %PREFIX%ui clean install spring-boot:run -q -DskipTests"
 
+@REM Run the resize service
+echo Running the resize service: %PREFIX%resize
+start cmd /c "call ./mvnw -f %PREFIX%resize clean install spring-boot:run -q -DskipTests"
+
 @REM Run the colors service
 echo Running the colors service: %PREFIX%colors
 start cmd /c "cd %PREFIX%colors && call poetry install && call poetry run python app.py"
