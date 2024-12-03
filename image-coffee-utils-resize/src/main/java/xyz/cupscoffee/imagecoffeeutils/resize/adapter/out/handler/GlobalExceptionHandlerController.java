@@ -1,4 +1,4 @@
-package xyz.cupscoffee.imagecoffeeutils.resize.shared.adapter.out.handler;
+package xyz.cupscoffee.imagecoffeeutils.resize.adapter.out.handler;
 
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

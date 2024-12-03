@@ -1,6 +1,6 @@
-package xyz.cupscoffee.imagecoffeeutils.resize.shared.application.util;
+package xyz.cupscoffee.imagecoffeeutils.resize.application.util;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class ImageUtils {

@@ -1,4 +1,4 @@
-package xyz.cupscoffee.imagecoffeeutils.resize.shared.adapter.out.bean;
+package xyz.cupscoffee.imagecoffeeutils.resize.adapter.out.bean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

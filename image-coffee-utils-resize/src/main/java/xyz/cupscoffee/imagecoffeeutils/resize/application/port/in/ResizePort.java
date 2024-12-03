@@ -1,4 +1,4 @@
-package xyz.cupscoffee.imagecoffeeutils.resize.shared.application.port.in;
+package xyz.cupscoffee.imagecoffeeutils.resize.application.port.in;
 
 import org.springframework.web.multipart.MultipartFile;
 

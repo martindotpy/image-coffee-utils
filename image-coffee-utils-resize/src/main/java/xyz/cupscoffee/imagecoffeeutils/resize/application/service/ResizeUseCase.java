@@ -1,4 +1,4 @@
-package xyz.cupscoffee.imagecoffeeutils.resize.shared.application.service;
+package xyz.cupscoffee.imagecoffeeutils.resize.application.service;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import xyz.cupscoffee.imagecoffeeutils.resize.shared.application.port.in.ResizePort;
-import xyz.cupscoffee.imagecoffeeutils.resize.shared.application.util.ImageUtils;
+import xyz.cupscoffee.imagecoffeeutils.resize.application.port.in.ResizePort;
+import xyz.cupscoffee.imagecoffeeutils.resize.application.util.ImageUtils;
 import xyz.cupscoffee.imagecoffeeutils.shared.adapter.out.annotations.UseCase;
 
 @UseCase
