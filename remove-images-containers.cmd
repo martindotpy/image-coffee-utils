@@ -4,3 +4,6 @@ for /f "tokens=*" %%i in ('docker ps -a --filter "name=image-coffee-utils.*" -q'
 
 REM Remove images
 for /f "tokens=*" %%i in ('docker images --format "{{.Repository}}:{{.Tag}}" ^| findstr "image-coffee-utils"') do docker rmi -f %%i
+
+REM List volumes and filter by name (if applicable)
+for /f "tokens=*" %%i in ('docker volume ls ^| findstr "image-coffee-utils" ^| awk "{print $2}"') do docker volume rm %%i

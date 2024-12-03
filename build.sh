@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the java microservices
-elements=("image-coffee-utils-config" "image-coffee-utils-eureka" "image-coffee-utils-gateway" "image-coffee-utils-ui" "image-coffee-utils-resize")
+elements=("image-coffee-utils-config" "image-coffee-utils-eureka" "image-coffee-utils-gateway" "image-coffee-utils-ui" "image-coffee-utils-resize" "image-coffee-utils-invert-colors")
 
 ./mvnw clean install package -DskipTests
 

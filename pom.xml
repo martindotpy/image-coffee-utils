@@ -22,6 +22,7 @@
         <module>image-coffee-utils-eureka</module>
         <module>image-coffee-utils-gateway</module>
         <module>image-coffee-utils-resize</module>
+        <module>image-coffee-utils-invert-colors</module>
         <module>image-coffee-utils-ui</module>
     </modules>
 
