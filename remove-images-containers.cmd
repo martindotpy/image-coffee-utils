@@ -1,9 +1,15 @@
 @echo off
-REM Remove containers
-for /f "tokens=*" %%i in ('docker ps -a --filter "name=image-coffee-utils.*" -q') do docker rm -f %%i
+@REM Remove containers
+FOR /F "tokens=*" %%A IN ('docker ps -a --filter "name=image-coffee-utils.*" -q') DO (
+    docker rm -f %%A
+)
 
-REM Remove images
-for /f "tokens=*" %%i in ('docker images --format "{{.Repository}}:{{.Tag}}" ^| findstr "image-coffee-utils"') do docker rmi -f %%i
+@REM Remove images
+FOR /F "tokens=*" %%A IN ('docker images --format "{{.Repository}}:{{.Tag}}" ^| findstr "image-coffee-utils"') DO (
+    docker rmi -f %%A
+)
 
-REM List volumes and filter by name (if applicable)
-for /f "tokens=*" %%i in ('docker volume ls ^| findstr "image-coffee-utils" ^| awk "{print $2}"') do docker volume rm %%i
+@REM Remove volumes
+FOR /F "tokens=2 delims= " %%A IN ('docker volume ls ^| findstr "image-coffee-utils"') DO (
+    docker volume rm %%A
+)
