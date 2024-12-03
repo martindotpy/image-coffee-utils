@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import xyz.cupscoffee.imagecoffeeutils.resize.shared.application.port.ResizeService;
+import xyz.cupscoffee.imagecoffeeutils.resize.shared.application.port.in.ResizePort;
 
 @RestController
 public class ResizeController {
 
     @Autowired
-    private ResizeService resizeService;
+    private ResizePort resizeService;
 
     @PostMapping
     public ResponseEntity<byte[]> resizeImage(
