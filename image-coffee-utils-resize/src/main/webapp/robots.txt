@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /components/
-Sitemap: https://image-coffee-utils.cupscoffee.xyz/sitemap.xml

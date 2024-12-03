@@ -1,0 +1,18 @@
+server:
+  host: image-coffee-utils.cupscoffee.xyz
+
+spring:
+  api:
+    version: v0
+
+logging:
+  pattern:
+    level: "%highlight(%-5level)"
+    console:
+      "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %highlight(%-5level)
+      %clr(${PID:- }){magenta} %clr(---){faint}
+      [%clr(${spring.application.name:-}){yellow}] %clr(%-45.45logger{45}){cyan}
+      %clr(:){faint} %m%n"
+
+  file:
+    path: logs

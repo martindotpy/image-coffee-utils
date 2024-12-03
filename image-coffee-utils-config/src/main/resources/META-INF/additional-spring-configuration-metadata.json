@@ -1,0 +1,14 @@
+{
+    "properties": [
+        {
+            "name": "spring.api.version",
+            "type": "java.lang.String",
+            "description": "The version of the API. Follows the Semantic Versioning v<major version> format"
+        },
+        {
+            "name": "server.host",
+            "type": "java.lang.String",
+            "description": "The host of the server"
+        }
+    ]
+}
