@@ -1,6 +1,5 @@
 package xyz.cupscoffee.imagecoffeeutils.resize.adapter.in.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
-import xyz.cupscoffee.imagecoffeeutils.resize.application.port.in.ResizePort;
+import lombok.RequiredArgsConstructor;
+import xyz.cupscoffee.imagecoffeeutils.resize.application.port.in.ResizeImagePort;
 
 @RestController
+@RequiredArgsConstructor
 public class ResizeController {
-
-    @Autowired
-    private ResizePort resizeService;
+    private final ResizeImagePort resizeService;
 
     /**
      * Resizes the given image to the specified width and height.

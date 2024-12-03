@@ -1,4 +1,4 @@
-package xyz.cupscoffee.imagecoffeeutils.domain.model;
+package xyz.cupscoffee.imagecoffeeutils.resize.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
