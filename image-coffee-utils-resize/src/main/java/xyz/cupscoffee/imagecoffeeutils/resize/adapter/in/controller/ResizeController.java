@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import xyz.cupscoffee.imagecoffeeutils.resize.application.port.in.ResizeImagePort;
 
+@Tag(name = "Resize", description = "Resize an image to the specified width and height")
 @RestController
 @RequiredArgsConstructor
 public class ResizeController {

@@ -14,7 +14,7 @@
 	<artifactId>image-coffee-utils-resize</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>image-coffee-utils-resize</name>
-	<description>This is the frontend for Image Coffee Utils.</description>
+	<description>Resize an image microserivice from Image Coffee Utils</description>
 	<packaging>jar</packaging>
 
 	<properties>
