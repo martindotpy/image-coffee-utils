@@ -1,0 +1,91 @@
+/* General Layout */
+.header-content-footer-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+header .flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.text-primary {
+    color: #007bff;
+}
+
+
+.btn-ghost {
+    background: none;
+    border: none;
+    color: #007bff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.btn-ghost.sm {
+    font-size: 0.875rem;
+}
+
+
+.border-r {
+    border-right: 1px solid #ddd;
+}
+
+.space-y-4 > *:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+
+.slider {
+    width: 100%;
+}
+
+
+.tabs-list {
+    display: flex;
+    gap: 1rem;
+}
+
+.tabs-trigger {
+    padding: 0.5rem 1rem;
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.tabs-content {
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ddd;
+    border-radius: 0.5rem;
+}
+
+
+.icon {
+    font-size: 1.25rem;
+}
+
+.icon.large {
+    font-size: 2rem;
+}
+
+.image-plus::before {
+    content: '📤'; 
+}
+
+.zoom-in::before {
+    content: '🔍+'; 
+}
+
+.zoom-out::before {
+    content: '🔍-'; 
+}
