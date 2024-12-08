@@ -16,16 +16,9 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
   </h:head>
   <h:body>
-    <div class="container-center">
-      <h:graphicImage
-        value="assets/svg/header-logotype.svg"
-        styleClass="main-logo"
-      />
-      <p:linkButton
-        outcome="app"
-        value="Get Started"
-        icon="pi pi-arrow-right"
-      />
+    <div class="layout">
+      <ui:include src="/components/organisms/sidebar.xhtml" />
+      <div class="content"></div>
     </div>
   </h:body>
 </html>

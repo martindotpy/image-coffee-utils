@@ -113,3 +113,25 @@ header {
   position: relative;
   height: 100px;
 }
+.container-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+.main-logo {
+  width: 500px;
+}
+.layout {
+  display: flex;
+  height: 100vh;
+  padding: 5rem;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f4f4f9;
+}
