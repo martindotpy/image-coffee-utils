@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Image Resizer</title>
+    <link rel="stylesheet" href="/assets/css/resize.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+
+            <div class="upload-area">
+                <div class="card">
+                    <div class="card-content">
+                        <div id="image-preview" class="image-preview">
+                            <img id="selected-image" alt="Vista previa" />
+                            <div id="original-dimensions" class="image-dimensions"></div>
+                        </div>
+                        <div id="image-upload-placeholder" class="image-upload-placeholder">
+                            <svg class="upload-icon">
+    
+                            </svg>
+                            <p>Haga clic para cargar una imagen</p>
+                        </div>
+                        <input id="file-input" type="file" accept="image/*" class="hidden" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="resize-controls">
+                <div class="card">
+                    <div class="card-content">
+                        <h2>Opciones de redimensión</h2>
+                        <div class="tabs">
+                            <div class="tabs-list">
+                                <button class="tab-trigger" id="pixels-tab">Por píxeles</button>
+                                <button class="tab-trigger" id="percentage-tab">Por porcentaje</button>
+                            </div>
+                        </div>
+                        <div class="resize-options">
+                            <div>
+                                <label for="width">Ancho (px):</label>
+                                <input id="width" type="number" />
+                            </div>
+                            <div>
+                                <label for="height">Altura (px):</label>
+                                <input id="height" type="number" />
+                            </div>
+                            <div class="aspect-ratio-option">
+                                <input id="aspect-ratio" type="checkbox" />
+                                <label for="aspect-ratio">Mantener relación de aspecto</label>
+                            </div>
+                        </div>
+                        <button id="resize-button" disabled>Redimensionar IMÁGENES</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
