@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Cropper</title>
+    <link rel="stylesheet" href="/assets/css/crooper.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+            <div class="space-y-4">
+                <div class="card">
+                    <div class="image-preview">
+                        <img id="imagePreview" alt="Upload preview" />
+                        <label for="imageUpload" id="imageLabel">
+                            <input
+                                type="file"
+                                id="imageUpload"
+                                accept="image/*"
+                                onchange="handleImageUpload(event)"
+                                hidden
+                            />
+                            <span>Subir imagen</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <canvas id="previewCanvas" class="canvas-preview"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Opciones de recorte</h2>
+                <div class="form-group">
+                    <label for="cropWidth">Ancho (px)</label>
+                    <input type="number" id="cropWidth" onchange="updateCropParams('width', this.value)" />
+                </div>
+                <div class="form-group">
+                    <label for="cropHeight">Altura (px)</label>
+                    <input type="number" id="cropHeight" onchange="updateCropParams('height', this.value)" />
+                </div>
+                <div class="form-group">
+                    <label for="cropX">Posición X (px)</label>
+                    <input type="number" id="cropX" onchange="updateCropParams('x', this.value)" />
+                </div>
+                <div class="form-group">
+                    <label for="cropY">Posición Y (px)</label>
+                    <input type="number" id="cropY" onchange="updateCropParams('y', this.value)" />
+                </div>
+                <button class="button" onclick="handleCrop()">Recortar IMAGEN</button>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
