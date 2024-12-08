@@ -1,0 +1,43 @@
+<ui:composition
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+>
+  <h:form>
+    <h1 style="color: white">Resize Image</h1>
+
+    <p:panel header="Resize tool">
+      <div style="margin-bottom: 20px">
+        <p:fileUpload mode="advanced" dragDropSupport="true" multiple="false">
+          <p:validateFile allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/" />
+        </p:fileUpload>
+      </div>
+
+      <div style="margin: 20px 0">
+        <p:panelGrid columns="2" layout="grid"></p:panelGrid>
+          <h:outputLabel for="width" value="Width (px):" />
+          <p:inputText id="width" />
+          <h:outputLabel for="height" value="Height (px):" />
+          <p:inputText id="height" />
+        </p:panelGrid>
+        <div style="margin-top: 10px; text-align: center">
+          <p:commandButton value="Resize" icon="pi pi-check" />
+        </div>
+      </div>
+
+      <p:panelGrid columns="2" layout="grid">
+        <p:graphicImage
+          srcset="https://picsum.photos/600/300"
+          class="image-colors"
+        />
+
+        <p:graphicImage
+          srcset="https://picsum.photos/300/300"
+          class="image-colors"
+        />
+        <p:commandButton value="Download" icon="pi pi-download" />
+      </p:panelGrid>
+    </p:panel>
+  </h:form>
+</ui:composition>

@@ -17,8 +17,18 @@
   </h:head>
   <h:body>
     <div class="layout">
-      <ui:include src="/components/organisms/sidebar.xhtml" />
-      <div class="content"></div>
+      <p:menu>
+        <p:submenu label="Image Tools">
+          <p:menuitem value="Colors" icon="pi pi-palette" />
+          <p:menuitem value="Crop" icon="pi pi-stop" />
+          <p:menuitem value="Invert Colors" icon="pi pi-images" />
+          <p:menuitem value="Resize" icon="pi pi-arrows-h" />
+        </p:submenu>
+      </p:menu>
+
+      <div class="content">
+        <ui:include src="/components/organisms/resize.xhtml" />
+      </div>
     </div>
   </h:body>
 </html>
