@@ -6,7 +6,7 @@ elements=("image-coffee-utils-config" "image-coffee-utils-eureka" "image-coffee-
 ./mvnw clean install package -DskipTests
 
 for e in "${elements[@]}"; do
-    ./mvnw -f "$e" spring-boot:build-image -DskipTests &
+    ./mvnw -f "$e" spring-boot:build-image -DskipTests
 done
 
 wait
