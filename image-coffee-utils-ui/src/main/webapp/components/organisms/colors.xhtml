@@ -9,34 +9,50 @@
     <h1 style="color: white">Colors</h1>
 
     <p:panel header="Extract Colors">
-      <p:fileUpload mode="advanced" dragDropSupport="true" multiple="false">
-        <p:validateFile allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/" />
+      <p:fileUpload
+        mode="advanced"
+        dragDropSupport="true"
+        multiple="false"
+        listener="#{colorsBean.handleFileUpload}"
+        auto="true"
+        update="@form"
+      >
+        <p:validateFile
+          allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/"
+          sizeLimit="104857600"
+        />
       </p:fileUpload>
-      <p:button value="Process Colors" icon="pi pi-check" />
-      <p:panelGrid columns="2" layout="grid" styleClass="colors-container">
+      <p:commandButton
+        value="Process Colors"
+        icon="pi pi-check"
+        action="#{colorsBean.processColors}"
+        update="@form messages"
+      />
+      <p:growl id="messages" showDetail="true" life="5000" />
+
+      <p:panelGrid
+        columns="2"
+        layout="grid"
+        styleClass="colors-container"
+        rendered="#{not empty colorsBean.colors}"
+      >
         <p:graphicImage
-          srcset="https://picsum.photos/700/400"
+          value="data:image/jpeg,png;base64,#{colorsBean.uploadedFile.content}"
           class="image-colors"
         />
 
         <p:panel header="Colors detected" styleClass="colors-container">
           <p:panelGrid columns="2" layout="grid">
-            <div
-              style="background-color: #ff5733; width: 50px; height: 50px"
-            ></div>
-            <h:outputText value="40%" />
-            <div
-              style="background-color: #33ff57; width: 50px; height: 50px"
-            ></div>
-            <h:outputText value="30%" />
-            <div
-              style="background-color: #3357ff; width: 50px; height: 50px"
-            ></div>
-            <h:outputText value="20%" />
-            <div
-              style="background-color: #f3ff33; width: 50px; height: 50px"
-            ></div>
-            <h:outputText value="10%" />
+            <ui:repeat value="#{colorsBean.colors}" var="color">
+              <div
+                style="
+                  background-color: #{color.color};
+                  width: 50px;
+                  height: 50px;
+                "
+              ></div>
+              <h:outputText value="#{color.percentage}%" />
+            </ui:repeat>
           </p:panelGrid>
         </p:panel>
       </p:panelGrid>
