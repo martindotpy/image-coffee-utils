@@ -1,81 +1,85 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
+  <head>
     <title>Color Extractor</title>
     <link rel="stylesheet" href="/assets/css/colors.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="header-content-footer-container">
-        <header>
-            <div class="flex items-center gap-4">
-                <h1 class="text-2xl font-bold text-primary">PINE TOOLS</h1>
-                <div class="flex gap-2">
-                    <button class="button ghost sm">EN</button>
-                    <button class="button ghost sm">ES</button>
-                </div>
+      <header>
+        <div class="flex items-center gap-4">
+          <h1 class="text-2xl font-bold text-primary">PINE TOOLS</h1>
+          <div class="flex gap-2">
+            <button class="button ghost sm">EN</button>
+            <button class="button ghost sm">ES</button>
+          </div>
+        </div>
+      </header>
+
+      <div
+        class="relative w-full h-full flex items-center justify-center p-6 bg-surface-container-low"
+      >
+        <div
+          class="relative w-full h-600 border-dashed-container rounded-lg flex items-center justify-center"
+        >
+          <div class="text-center space-y-2">
+            <i class="icon image-plus"></i>
+            <p class="text-on-surface-variant">Arrastra una imagen aquí...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-l border-surface-variant p-6 bg-surface">
+        <div class="space-y-6">
+          <h2
+            class="text-lg font-semibold text-on-surface flex items-center gap-2"
+          >
+            <i class="icon palette"></i> Colores Extraídos
+          </h2>
+
+          <div class="tabs">
+            <div class="tabs-list">
+              <button class="tabs-trigger active">Muestras</button>
+              <button class="tabs-trigger">Lista</button>
             </div>
-        </header>
 
-
-            <div class="relative w-full h-full flex items-center justify-center p-6 bg-surface-container-low">
-                <div class="relative w-full h-600 border-dashed-container rounded-lg flex items-center justify-center">
-                    <div class="text-center space-y-2">
-                        <i class="icon image-plus"></i>
-                        <p class="text-on-surface-variant">Arrastra una imagen aquí...</p>
-                    </div>
+            <div class="tabs-content active">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="aspect-square rounded-lg swatch-container">
+                  <div class="swatch" style="background-color: #8b4513"></div>
                 </div>
+              </div>
             </div>
 
-
-            <div class="border-l border-surface-variant p-6 bg-surface">
-                <div class="space-y-6">
-                    <h2 class="text-lg font-semibold text-on-surface flex items-center gap-2">
-                        <i class="icon palette"></i> Colores Extraídos
-                    </h2>
-
-                    <div class="tabs">
-                        <div class="tabs-list">
-                            <button class="tabs-trigger active">Muestras</button>
-                            <button class="tabs-trigger">Lista</button>
-                        </div>
-
-                        <div class="tabs-content active">
-                            <div class="grid grid-cols-2 gap-4">
-
-                                <div class="aspect-square rounded-lg swatch-container">
-                                    <div class="swatch" style="background-color: #8B4513;"></div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="tabs-content">
-                            <div class="space-y-4">
-
-                                <div class="flex items-center gap-3 p-3 rounded-lg color-item">
-                                    <div class="w-10 h-10 rounded-md" style="background-color: #8B4513;"></div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-medium text-on-surface">#8B4513</p>
-                                        <p class="text-xs text-on-surface-variant">rgb(139, 69, 19)</p>
-                                    </div>
-                                    <div class="text-sm text-on-surface-variant">45%</div>
-                                </div>
-    
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-3">
-                        <button class="button lg">
-                            <i class="icon palette"></i> Extraer Colores
-                        </button>
-                        <button class="button outline">
-                            <i class="icon download"></i> Descargar Paleta
-                        </button>
-                    </div>
+            <div class="tabs-content">
+              <div class="space-y-4">
+                <div class="flex items-center gap-3 p-3 rounded-lg color-item">
+                  <div
+                    class="w-10 h-10 rounded-md"
+                    style="background-color: #8b4513"
+                  ></div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-on-surface">#8B4513</p>
+                    <p class="text-xs text-on-surface-variant">
+                      rgb(139, 69, 19)
+                    </p>
+                  </div>
+                  <div class="text-sm text-on-surface-variant">45%</div>
                 </div>
+              </div>
             </div>
-        </main>
+          </div>
+
+          <div class="space-y-3">
+            <button class="button lg">
+              <i class="icon palette"></i> Extraer Colores
+            </button>
+            <button class="button outline">
+              <i class="icon download"></i> Descargar Paleta
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

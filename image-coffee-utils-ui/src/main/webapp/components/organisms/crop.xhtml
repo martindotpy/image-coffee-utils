@@ -8,7 +8,6 @@
   <h:form>
     <p:growl id="messages" showDetail="true" />
 
-    
     <p:fileUpload
       mode="advanced"
       multiple="false"
@@ -21,39 +20,41 @@
       />
     </p:fileUpload>
 
-    <p:outputPanel id="cropperPanel">
-      <h:panelGrid
-        columns="1"
-        rendered="#{not empty cropUploaderBean.originalImageFile}"
-      >
-        <p:commandButton
-          value="Crop"
-          action="#{cropUploaderBean.crop}"
-          update="cropped messages"
-          styleClass="my-3"
-        />
-
-        <h:panelGrid columns="2" cellpadding="7">
-          <p:imageCropper
-            value="#{cropUploaderBean.croppedImage}"
-            id="imageCropper"
-            cache="false"
-            image="#{cropUploaderBean.image}"
-            initialCoords="50,50,150,100"
-            minSize="50,50"
-            maxSize="350,350"
+    <p:panel>
+      <p:outputPanel id="cropperPanel">
+        <h:panelGrid
+          columns="1"
+          rendered="#{not empty cropUploaderBean.originalImageFile}"
+        >
+          <p:commandButton
+            value="Crop"
+            action="#{cropUploaderBean.crop}"
+            update="cropped messages"
+            styleClass="my-3"
           />
 
-          <p:outputPanel id="cropped">
-            <p:graphicImage
+          <h:panelGrid columns="2" cellpadding="7">
+            <p:imageCropper
+              value="#{cropUploaderBean.croppedImage}"
+              id="imageCropper"
               cache="false"
-              rendered="#{not empty cropUploaderBean.croppedImage}"
-              value="#{cropUploaderBean.cropped}"
+              image="#{cropUploaderBean.image}"
+              initialCoords="50,50,150,100"
+              minSize="50,50"
+              maxSize="350,350"
             />
-            <p:commandButton value="Download"></p:commandButton>
-          </p:outputPanel>
+
+            <p:outputPanel id="cropped">
+              <p:graphicImage
+                cache="false"
+                rendered="#{not empty cropUploaderBean.croppedImage}"
+                value="#{cropUploaderBean.cropped}"
+              />
+              <p:commandButton value="Download"></p:commandButton>
+            </p:outputPanel>
+          </h:panelGrid>
         </h:panelGrid>
-      </h:panelGrid>
-    </p:outputPanel>
+      </p:outputPanel>
+    </p:panel>
   </h:form>
 </ui:composition>

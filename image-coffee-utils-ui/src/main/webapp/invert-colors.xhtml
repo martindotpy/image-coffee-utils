@@ -1,77 +1,95 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
-<head>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+  <head>
     <title>Image Editor</title>
     <link rel="stylesheet" href="/assets/css/image-editor.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="header-content-footer-container">
-        <!-- Header -->
-        <header>
-            <div class="flex items-center gap-4">
-                <h1 class="text-2xl font-bold text-primary">PINE TOOLS</h1>
-                <div class="flex gap-2">
-                    <button class="btn-ghost sm">EN</button>
-                    <button class="btn-ghost sm">ES</button>
-                </div>
+      <!-- Header -->
+      <header>
+        <div class="flex items-center gap-4">
+          <h1 class="text-2xl font-bold text-primary">PINE TOOLS</h1>
+          <div class="flex gap-2">
+            <button class="btn-ghost sm">EN</button>
+            <button class="btn-ghost sm">ES</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <main class="grid grid-cols bg-surface">
+        <!-- Sidebar -->
+        <aside class="border-r border-surface-variant p-4 space-y-4">
+          <div class="space-y-2">
+            <h2 class="text-on-surface font-semibold">Tools</h2>
+            <button class="btn-ghost w-full justify-start">
+              <i class="icon image-plus mr-2"></i>Import Image
+            </button>
+            <div class="space-y-1">
+              <button class="btn-ghost w-full justify-start">
+                <i class="icon zoom-in mr-2"></i>Zoom In
+              </button>
+              <button class="btn-ghost w-full justify-start">
+                <i class="icon zoom-out mr-2"></i>Zoom Out
+              </button>
             </div>
-        </header>
+          </div>
 
-        <!-- Main -->
-        <main class="grid grid-cols bg-surface">
-            <!-- Sidebar -->
-            <aside class="border-r border-surface-variant p-4 space-y-4">
-                <div class="space-y-2">
-                    <h2 class="text-on-surface font-semibold">Tools</h2>
-                    <button class="btn-ghost w-full justify-start">
-                        <i class="icon image-plus mr-2"></i>Import Image
-                    </button>
-                    <div class="space-y-1">
-                        <button class="btn-ghost w-full justify-start">
-                            <i class="icon zoom-in mr-2"></i>Zoom In
-                        </button>
-                        <button class="btn-ghost w-full justify-start">
-                            <i class="icon zoom-out mr-2"></i>Zoom Out
-                        </button>
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <h2 class="text-on-surface font-semibold">Adjustments</h2>
-                    <div class="space-y-4">
-                        <div class="space-y-2">
-                            <label class="text-sm text-on-surface-variant">Threshold</label>
-                            <input type="range" min="0" max="255" step="1" value="128" class="slider" />
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Main Content -->
-            <div class="p-6">
-                <div class="tabs space-y-4">
-                    <div class="tabs-list">
-                        <button class="tabs-trigger" data-value="original">Original</button>
-                        <button class="tabs-trigger" data-value="processed">Black & White</button>
-                    </div>
-                    <div class="tabs-content" data-value="original">
-                        <div class="content-center">
-                            <i class="icon image-plus large"></i>
-                            <p class="text-on-surface-variant">Drag and drop an image or click to upload</p>
-                        </div>
-                    </div>
-                    <div class="tabs-content" data-value="processed">
-                        <div class="content-center">
-                            <p class="text-on-surface-variant">Processed image will appear here</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-4 flex justify-end">
-                    <button class="btn">Apply Changes</button>
-                </div>
+          <div class="space-y-2">
+            <h2 class="text-on-surface font-semibold">Adjustments</h2>
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <label class="text-sm text-on-surface-variant">Threshold</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="255"
+                  step="1"
+                  value="128"
+                  class="slider"
+                />
+              </div>
             </div>
-        </main>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="p-6">
+          <div class="tabs space-y-4">
+            <div class="tabs-list">
+              <button class="tabs-trigger" data-value="original">
+                Original
+              </button>
+              <button class="tabs-trigger" data-value="processed">
+                Black and White
+              </button>
+            </div>
+            <div class="tabs-content" data-value="original">
+              <div class="content-center">
+                <i class="icon image-plus large"></i>
+                <p class="text-on-surface-variant">
+                  Drag and drop an image or click to upload
+                </p>
+              </div>
+            </div>
+            <div class="tabs-content" data-value="processed">
+              <div class="content-center">
+                <p class="text-on-surface-variant">
+                  Processed image will appear here
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 flex justify-end">
+            <button class="btn">Apply Changes</button>
+          </div>
+        </div>
+      </main>
     </div>
-</body>
+  </body>
 </html>
