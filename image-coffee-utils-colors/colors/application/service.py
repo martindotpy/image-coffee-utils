@@ -54,7 +54,7 @@ class GetMostCommonColorsFromImageService(GetMostCommonColorsFromImagePort):
 
         most_common_colors: list[MostCommonColors] = []
 
-        for order in orders:
+        for i, order in enumerate(orders, start=1):
             color: tuple[int, int, int] = tuple(dominant_colors[order])
             count: int = int(count_tags[order])
             percentage: float = round(count / total_count * 100, 2)
@@ -66,7 +66,7 @@ class GetMostCommonColorsFromImageService(GetMostCommonColorsFromImagePort):
             most_common_colors.append(
                 MostCommonColors(
                     color=hexadecimal_color,
-                    order=order + 1,
+                    order=i,
                     percentage=percentage,
                 )
             )
