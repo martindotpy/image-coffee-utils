@@ -129,7 +129,8 @@ header {
 
 .layout {
   display: flex;
-  height: 100vh;
+  flex-direction: row;
+  width: 100%;
   padding: 2rem;
 }
 
@@ -137,6 +138,9 @@ header {
   flex: 1;
   padding: 20px;
   background-color: var(--color-surface-bright);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .colors-container {
