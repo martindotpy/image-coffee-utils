@@ -1,99 +1,140 @@
 package xyz.cupscoffee.imagecoffeeutils.ui.shared.application.port.in.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.CroppedImage;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import lombok.Data;
 
 @Named
 @SessionScoped
+@Data
 public class CropUploaderBean implements Serializable {
 
     private CroppedImage croppedImage;
-
     private UploadedFile originalImageFile;
+    private StreamedContent cropped;
+    private String apiUrl = "http://localhost:8080/api/v0/crop";
 
-    public CroppedImage getCroppedImage() {
-        return croppedImage;
-    }
-
-    public void setCroppedImage(CroppedImage croppedImage) {
-        this.croppedImage = croppedImage;
-    }
-
-    public UploadedFile getOriginalImageFile() {
-        return originalImageFile;
-    }
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public void handleFileUpload(FileUploadEvent event) {
-        this.originalImageFile = null;
+        this.originalImageFile = event.getFile();
         this.croppedImage = null;
-        UploadedFile file = event.getFile();
-        if (file != null && file.getContent() != null && file.getContent().length > 0 && file.getFileName() != null) {
-            this.originalImageFile = file;
-            FacesMessage msg = new FacesMessage("Successful", this.originalImageFile.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
+        this.cropped = null;
 
-    public void crop() {
-        if (this.croppedImage == null || this.croppedImage.getBytes() == null
-                || this.croppedImage.getBytes().length == 0) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-                    "Cropping failed."));
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success",
-                    "Cropped successfully."));
+        if (originalImageFile != null && originalImageFile.getContent() != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "File uploaded successfully",
+                            originalImageFile.getFileName()));
         }
     }
 
     public StreamedContent getImage() {
+        if (originalImageFile == null) {
+            return null;
+        }
         return DefaultStreamedContent.builder()
-                .contentType(originalImageFile == null ? null : originalImageFile.getContentType())
-                .stream(() -> {
-                    if (originalImageFile == null
-                            || originalImageFile.getContent() == null
-                            || originalImageFile.getContent().length == 0) {
-                        return null;
-                    }
-
-                    try {
-                        return new ByteArrayInputStream(originalImageFile.getContent());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
+                .stream(() -> new ByteArrayInputStream(originalImageFile.getContent()))
+                .contentType(originalImageFile.getContentType())
                 .build();
     }
 
-    public StreamedContent getCropped() {
-        return DefaultStreamedContent.builder()
-                .contentType(originalImageFile == null ? null : originalImageFile.getContentType())
-                .stream(() -> {
-                    if (croppedImage == null
-                            || croppedImage.getBytes() == null
-                            || croppedImage.getBytes().length == 0) {
-                        return null;
-                    }
+    public void crop() {
+        if (croppedImage == null || originalImageFile == null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                            "No image or cropping coordinates provided."));
+            return;
+        }
 
-                    try {
-                        return new ByteArrayInputStream(this.croppedImage.getBytes());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
-                .build();
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+
+            String boundary = "boundary-" + System.currentTimeMillis();
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(apiUrl))
+                    .header("Content-Type", "multipart/form-data; boundary=" + boundary)
+                    .POST(createMultipartBody(boundary))
+                    .build();
+
+            HttpResponse<byte[]> response = client.send(request, HttpResponse.BodyHandlers.ofByteArray());
+
+            if (response.statusCode() == 200) {
+               
+                cropped = DefaultStreamedContent.builder()
+                        .stream(() -> new ByteArrayInputStream(response.body()))
+                        .contentType("image/jpg") 
+                        .name("cropped-image.jpg") 
+                        .build();
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Image cropped successfully."));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                                "Cropping failed. Status Code: " + response.statusCode()));
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "An unexpected error occurred."));
+            e.printStackTrace();
+        }
     }
 
+    private HttpRequest.BodyPublisher createMultipartBody(String boundary) throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        outputStream.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write(("Content-Disposition: form-data; name=\"file\"; filename=\""
+                + originalImageFile.getFileName() + "\"\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write(
+                ("Content-Type: " + originalImageFile.getContentType() + "\r\n\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write(originalImageFile.getContent());
+        outputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+
+        outputStream.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write("Content-Disposition: form-data; name=\"x\"\r\n\r\n".getBytes(StandardCharsets.UTF_8));
+        outputStream.write(String.valueOf(croppedImage.getLeft()).getBytes(StandardCharsets.UTF_8));
+        outputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+
+        outputStream.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write("Content-Disposition: form-data; name=\"y\"\r\n\r\n".getBytes(StandardCharsets.UTF_8));
+        outputStream.write(String.valueOf(croppedImage.getTop()).getBytes(StandardCharsets.UTF_8));
+        outputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+
+        outputStream.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write("Content-Disposition: form-data; name=\"width\"\r\n\r\n".getBytes(StandardCharsets.UTF_8));
+        outputStream.write(String.valueOf(croppedImage.getWidth()).getBytes(StandardCharsets.UTF_8));
+        outputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+
+        outputStream.write(("--" + boundary + "\r\n").getBytes(StandardCharsets.UTF_8));
+        outputStream.write("Content-Disposition: form-data; name=\"height\"\r\n\r\n".getBytes(StandardCharsets.UTF_8));
+        outputStream.write(String.valueOf(croppedImage.getHeight()).getBytes(StandardCharsets.UTF_8));
+        outputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+
+        outputStream.write(("--" + boundary + "--\r\n").getBytes(StandardCharsets.UTF_8));
+
+        return HttpRequest.BodyPublishers.ofByteArray(outputStream.toByteArray());
+    }
 }
