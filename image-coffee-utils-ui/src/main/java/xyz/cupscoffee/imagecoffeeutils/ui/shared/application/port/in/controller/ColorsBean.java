@@ -30,7 +30,7 @@ public class ColorsBean implements Serializable {
 
     private UploadedFile uploadedFile;
     private List<CommonColor> colors;
-    private String apiUrl = "http://localhost:8080/api/v0/colors";
+    private String apiUrl = "https://image-coffee-utils.cupscoffee.xyz/api/v0/colors";
     private int n = 5;
 
     @Autowired

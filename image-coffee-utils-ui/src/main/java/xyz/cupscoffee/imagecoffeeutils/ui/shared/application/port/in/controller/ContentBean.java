@@ -11,7 +11,7 @@ import lombok.Setter;
 @ViewScoped
 @Getter
 @Setter
-public class ContentController implements Serializable {
+public class ContentBean implements Serializable {
     private String currentPage = "/components/organisms/colors.xhtml";
 
     public void changePage(String page) {

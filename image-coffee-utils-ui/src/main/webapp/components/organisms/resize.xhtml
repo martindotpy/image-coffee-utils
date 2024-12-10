@@ -9,7 +9,14 @@
 
     <p:panel header="Resize tool">
       <div style="margin-bottom: 20px">
-        <p:fileUpload mode="advanced" dragDropSupport="true" multiple="false">
+        <p:fileUpload
+          mode="advanced"
+          dragDropSupport="true"
+          multiple="false"
+          listener="#{resizeImageBean.handleFileUpload}"
+          auto="true"
+          update="@form"
+        >
           <p:validateFile allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/" />
         </p:fileUpload>
       </div>
@@ -17,26 +24,42 @@
       <div style="margin: 20px 0">
         <p:panelGrid columns="2" layout="grid">
           <h:outputLabel for="width" value="Width (px):" />
-          <p:inputText id="width" />
+          <p:inputText id="width" value="#{resizeImageBean.width}" />
           <h:outputLabel for="height" value="Height (px):" />
-          <p:inputText id="height" />
+          <p:inputText id="height" value="#{resizeImageBean.height}" />
         </p:panelGrid>
         <div style="margin-top: 10px; text-align: center">
-          <p:commandButton value="Resize" icon="pi pi-check" />
+          <p:commandButton
+            value="Resize"
+            icon="pi pi-check"
+            action="#{resizeImageBean.resize}"
+            update="@form messages"
+          />
         </div>
       </div>
 
-      <p:panelGrid columns="2" layout="grid">
-        <p:graphicImage
-          srcset="https://picsum.photos/600/300"
-          class="image-colors"
-        />
+      <p:growl id="messages" showDetail="true" life="5000" />
 
+      <p:panelGrid
+        columns="2"
+        layout="grid"
+        rendered="#{not empty resizeImageBean.resizedImage}"
+      >
         <p:graphicImage
-          srcset="https://picsum.photos/300/300"
+          cache="false"
+          value="#{resizeImageBean.originalImage}"
           class="image-colors"
         />
-        <p:commandButton value="Download" icon="pi pi-download" />
+        <p:graphicImage
+          cache="false"
+          value="#{resizeImageBean.resizedImage}"
+          class="image-colors"
+        />
+        <p:commandButton
+          value="Download"
+          icon="pi pi-download"
+          onclick="window.open('#{resizeImageBean.downloadLink}')"
+        />
       </p:panelGrid>
     </p:panel>
   </h:form>
