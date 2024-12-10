@@ -32,7 +32,7 @@ public class CropUploaderBean implements Serializable {
     private CroppedImage croppedImage;
     private UploadedFile originalImageFile;
     private StreamedContent cropped;
-    private String apiUrl = "http://localhost:8080/api/v0/crop";
+    private String apiUrl = "https://image-coffee-utils.cupscoffee.xyz/api/v0/crop";
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -81,11 +81,11 @@ public class CropUploaderBean implements Serializable {
             HttpResponse<byte[]> response = client.send(request, HttpResponse.BodyHandlers.ofByteArray());
 
             if (response.statusCode() == 200) {
-               
+
                 cropped = DefaultStreamedContent.builder()
                         .stream(() -> new ByteArrayInputStream(response.body()))
-                        .contentType("image/jpg") 
-                        .name("cropped-image.jpg") 
+                        .contentType("image/jpg")
+                        .name("cropped-image.jpg")
                         .build();
 
                 FacesContext.getCurrentInstance().addMessage(null,

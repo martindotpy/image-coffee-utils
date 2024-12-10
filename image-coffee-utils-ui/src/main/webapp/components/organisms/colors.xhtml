@@ -37,12 +37,13 @@
         rendered="#{not empty colorsBean.colors}"
       >
         <p:graphicImage
-          value="data:image/jpeg,png;#{colorsBean.uploadedFile.content}"
+          value="#{colorsBean.uploadedFile.content}"
           class="image-colors"
+          cache="false"
         />
 
         <p:panel header="Colors detected" styleClass="colors-container">
-          <p:panelGrid columns="2" layout="grid">
+          <p:panelGrid columns="3" layout="grid">
             <ui:repeat value="#{colorsBean.colors}" var="color">
               <div
                 style="
@@ -52,6 +53,7 @@
                 "
               ></div>
               <h:outputText value="#{color.percentage}%" />
+              <h:outputText value="#{color.color}" />
             </ui:repeat>
           </p:panelGrid>
         </p:panel>

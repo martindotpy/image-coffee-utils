@@ -7,28 +7,54 @@
   <h:form>
     <h1 style="color: white">Invert Colors</h1>
 
-    <p:panel header="Invert Colors Tool">
-      <div style="margin-bottom: 20px">
-        <p:fileUpload mode="advanced" dragDropSupport="true" multiple="false">
-          <p:validateFile allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/" />
-        </p:fileUpload>
-        <p:button value="Invert Colors" icon="pi pi-check" />
-      </div>
+    <p:growl id="messages" showDetail="true" life="5000" />
 
-      <p:panelGrid columns="2" layout="grid" style="margin-top: 20px">
+    <p:panel header="Invert Colors Tool">
+      <p:fileUpload
+        mode="advanced"
+        dragDropSupport="true"
+        multiple="false"
+        listener="#{invertColorsBean.handleFileUpload}"
+        auto="true"
+        update="@form"
+      >
+        <p:validateFile
+          allowTypes="/(\.|\/)(gif|jpeg|jpg|png)$/"
+          sizeLimit="10485760"
+        />
+      </p:fileUpload>
+
+      <p:commandButton
+        value="Invert Colors"
+        icon="pi pi-check"
+        action="#{invertColorsBean.invertColors}"
+        update="imagePreview"
+      />
+
+      <p:panelGrid
+        columns="2"
+        layout="grid"
+        id="imagePreview"
+        style="margin-top: 20px"
+      >
         <p:graphicImage
-          srcset="https://picsum.photos/600/300"
-          class="image-colors"
+          value="#{invertColorsBean.originalImage}"
+          styleClass="image-colors"
         />
 
         <p:graphicImage
-          srcset="https://picsum.photos/600/300"
-          class="image-colors"
+          value="#{invertColorsBean.invertedImage}"
+          styleClass="image-colors"
         />
       </p:panelGrid>
 
       <div style="text-align: right; margin-top: 20px">
-        <p:commandButton value="Download" icon="pi pi-download" />
+        <p:commandButton
+          value="Download"
+          icon="pi pi-download"
+          disabled="#{empty invertColorsBean.invertedImage}"
+          onclick="window.open('#{invertColorsBean.downloadUrl}', '_blank')"
+        />
       </div>
     </p:panel>
   </h:form>

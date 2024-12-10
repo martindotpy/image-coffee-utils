@@ -23,25 +23,25 @@
             <p:menuitem
               value="Colors"
               icon="pi pi-palette"
-              action="#{contentController.changePage('/components/organisms/colors.xhtml')}"
+              action="#{contentBean.changePage('/components/organisms/colors.xhtml')}"
               update="content"
             />
             <p:menuitem
               value="Crop"
               icon="pi pi-stop"
-              action="#{contentController.changePage('/components/organisms/crop.xhtml')}"
+              action="#{contentBean.changePage('/components/organisms/crop.xhtml')}"
               update="content"
             />
             <p:menuitem
               value="Invert Colors"
               icon="pi pi-images"
-              action="#{contentController.changePage('/components/organisms/invertColors.xhtml')}"
+              action="#{contentBean.changePage('/components/organisms/invertColors.xhtml')}"
               update="content"
             />
             <p:menuitem
               value="Resize"
               icon="pi pi-arrows-h"
-              action="#{contentController.changePage('/components/organisms/resize.xhtml')}"
+              action="#{contentBean.changePage('/components/organisms/resize.xhtml')}"
               update="content"
             />
           </p:submenu>
@@ -50,7 +50,7 @@
 
       <div class="content">
         <h:panelGroup id="content">
-          <ui:include src="#{contentController.currentPage}" />
+          <ui:include src="#{contentBean.currentPage}" />
         </h:panelGroup>
       </div>
     </div>
